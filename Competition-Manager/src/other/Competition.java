@@ -27,7 +27,10 @@ public class Competition {
 			//TODO: Exception
 		}
 	}
-	
+	/**
+	 * Creates 4 groups; each containing 4 teams.
+	 * Teams are grouped randomly
+	 */
 	public void createGroups() {
 		if(teamList.size() == 16 && groupList.size() == 0) {
 			List<Team> dummyTeamList = new ArrayList<Team>(teamList);

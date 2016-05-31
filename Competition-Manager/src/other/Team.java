@@ -2,11 +2,11 @@ package other;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Team {
-	
+public class Team{
+		
 	/* Consts */
-	public static final int MAXIMAL_TEAM_SIZE = 23;
-	public static final int MINIMAL_TEAM_SIZE = 11;
+	public static final int TEAM_SIZE_MAX = 23;
+	public static final int TEAM_SIZE_MIN = 11;
 	
 	/* Variables */
 	private List<Player> playerList = new ArrayList<Player>();
@@ -19,9 +19,27 @@ public class Team {
 	
 	/* Methods */
 	public void addPlayer(Player player) {
-		if (playerList.size() < MAXIMAL_TEAM_SIZE) {
-			playerList.add(player);
-			//TODO; Logging
+		if (playerList.size() < TEAM_SIZE_MAX) {
+			
+			boolean numberFree = true;
+			
+			for (Player p : playerList) {
+				if (p.getNumber() == player.getNumber()) {
+					numberFree = false;
+					break;
+				}
+			}
+			
+			if (numberFree) {
+				playerList.add(player);
+				//TODO; Logging
+			}
+			else {
+				//TODO; Exception, bzw Fehler
+			}
+			
+			
+
 		} else {
 			//TODO; Exception
 		}
