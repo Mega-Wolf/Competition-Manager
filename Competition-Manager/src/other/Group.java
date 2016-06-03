@@ -9,7 +9,9 @@ import match.Match;
 public class Group {
 	
 	/* Variables */
-	protected List<Team> teamList = new ArrayList<Team>();
+	private List<Team> teamList = new ArrayList<Team>();
+	
+	private int id;
 	
 	protected final Match[] matches = new Match[6];
 	//protected final String name;

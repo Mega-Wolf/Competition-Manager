@@ -9,15 +9,17 @@ public class Team{
 	public static final int TEAM_SIZE_MIN = 11;
 	
 	/* Variables */
-	private List<Player> playerList = new ArrayList<Player>();
+	private final int id;
 	private String school;
 	
 	/* Constructor */
-	public Team(String school) {
+	public Team(int id, String school) {
+		this.id = id;
 		this.school = school;
 	}
 	
 	/* Methods */
+	/*
 	public void addPlayer(Player player) {
 		if (playerList.size() < TEAM_SIZE_MAX) {
 			
@@ -54,7 +56,7 @@ public class Team{
 		else {
 			//TODO: Exception
 		}
-	}
+	}*/
 	
 	/* Setter */
 	
@@ -62,8 +64,9 @@ public class Team{
 	public String getSchool() {
 		return school;
 	}
-	
+	/*
 	public int getNumberOfPlayers() {
 		return playerList.size();
 	}
+	*/
 }

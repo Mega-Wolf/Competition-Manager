@@ -2,21 +2,46 @@ package other;
 public class Player {
 	
 	/* Variables */
+	private int number;
+	private int team;
 	private String forename;
 	private String surname;
-	private int number;
-	//private 
 	
 	/* Constructor */
-	public Player(String forename, String surname, int number) {
+	public Player(int number, int team, String forename, String surname) {
+		this.number = number;
+		this.team = team;
 		this.forename = forename;
 		this.surname = surname;
-		this.number = number;
 	}
 	
 	/* Setter */
+	public void setNumber(int number) {
+		this.number = number;
+	}
+	
+	public void setTeam(int team) {
+		this.team = team;
+	}
+
+	public void setForename(String forename) {
+		this.forename = forename;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+	
 	
 	/* Getter */
+	public int getNumber() {
+		return number;
+	}
+	
+	public int getTeam() {
+		return team;
+	}
+	
 	public String getForename() {
 		return forename;
 	}
@@ -24,8 +49,5 @@ public class Player {
 	public String getSurname() {
 		return surname;
 	}
-
-	public int getNumber() {
-		return number;
-	}
+	
 }

@@ -3,36 +3,31 @@ package other;
 import java.util.ArrayList;
 import java.util.List;
 
+import match.Match;
+
 public class Competition {
-	
+	/* Consts */
 	public static final int TEAM_MAX = 16;
 	
+	/* Variables */
 	private List<Team> teamList = new ArrayList<Team>();
 	private List<Group> groupList = new ArrayList<Group>();
+	private List<Match> matchList = new ArrayList<Match>();
+	private List<Player> playerList = new ArrayList<Player>();
 	
-	public void addTeam(Team team) {
-		if (teamList.size() < 16) {
-			teamList.add(team);
-			//TODO: logging
-		} else {
-			//TODO: exception
-		}
+	/* Constructor */
+	public Competition() {
+		
 	}
 	
-	public void deleteTeam(Team team) {	
-		if(teamList.contains(team)) {
-			teamList.remove(team);
-			//TODO: logging
-		} else {
-			//TODO: Exception
-		}
-	}
+	/* Methods */
+	
 	/**
 	 * Creates 4 groups; each containing 4 teams.
 	 * Teams are grouped randomly
 	 */
 	public void createGroups() {
-		if(teamList.size() == 16 && groupList.size() == 0) {
+		if(groupList.size() == 0) {
 			List<Team> dummyTeamList = new ArrayList<Team>(teamList);
 			
 			for (int i = 0; i < 4; i++) {
