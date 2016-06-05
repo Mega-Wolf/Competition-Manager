@@ -48,6 +48,8 @@ public class Main extends Application {
 		root.setCenter(null);
 	}
 	
+	
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
