@@ -32,7 +32,6 @@ public class Player {
 		this.surname = surname;
 	}
 	
-	
 	/* Getter */
 	public int getNumber() {
 		return number;
@@ -50,4 +49,13 @@ public class Player {
 		return surname;
 	}
 	
+	/* Overrides */
+	@Override
+	public boolean equals(Object arg0) {		
+		if (arg0 instanceof Player) {
+			Player test = (Player) arg0;
+			return (test.number == -1 || number == test.number) && (test.team == -1 || team == test.team) && (test.surname == null || surname == test.surname) && (test.forename == null || forename == test.forename);
+		}
+		return false;
+	}
 }
