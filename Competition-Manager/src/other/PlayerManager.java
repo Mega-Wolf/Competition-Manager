@@ -1,9 +1,9 @@
 package other;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class PlayerManager {
 
@@ -11,22 +11,16 @@ public class PlayerManager {
 	private ConcurrentHashMap<Integer, Player> playerMap = new ConcurrentHashMap<>();
 	private int idCounter;
 
-	/* Methodes */
+	/* Methods */
 	private synchronized boolean checkPlayer(Player newPlayer) {
-
-		int teamSize = 0;
-
-		for (Entry<Integer, Player> p : playerMap.entrySet()) {
-			if (p.getValue().getTeam() == newPlayer.getTeam()) {
-				teamSize++;
-				if (p.getValue().getNumber() == newPlayer.getNumber()) {
-					return false;
-				}
-			}
+		
+		//parallelStream used, because up to 368 players
+		List<Player> teamMember = playerMap.values().parallelStream().filter(p -> p.getTeam() == newPlayer.getTeam()).collect(Collectors.toList());
+		
+		if (teamMember.size() < Team.TEAM_SIZE_MAX) {
+			return teamMember.stream().noneMatch(p -> p.getNumber() == newPlayer.getNumber());
 		}
-		if (teamSize < Team.TEAM_SIZE_MAX) {
-			return true;
-		}
+		
 		return false;
 	}
 
@@ -36,13 +30,7 @@ public class PlayerManager {
 	}
 
 	public Map<Integer, Player> getMatchingPlayers(Player matchingPlayer) {
-		Map<Integer, Player> retMap = new HashMap<>();
-		for (Entry<Integer, Player> p : playerMap.entrySet()) {
-			if (p.equals(matchingPlayer)) {
-				retMap.put(p.getKey(), p.getValue());
-			}
-		}
-		return retMap;
+		return playerMap.entrySet().stream().filter(p -> p.equals(matchingPlayer)).collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
 	}
 
 	/* "Setter" */
