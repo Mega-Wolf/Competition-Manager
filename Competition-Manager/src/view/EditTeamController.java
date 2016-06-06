@@ -5,11 +5,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import other.Team;
 
 public class EditTeamController extends Thread {
+	
+	@FXML
+	private AnchorPane pane;
 	
 	@FXML
 	private GridPane grid;
@@ -34,6 +38,8 @@ public class EditTeamController extends Thread {
 			newPlayerSurname.setPromptText("Nachname");
 			TextField number = new TextField();
 			
+			//pane.setPrefHeight(pane.getHeight() + grid.getPrefHeight());
+			pane.setMinHeight(pane.getHeight() + grid.getPrefHeight());
 			grid.add(player, 0, (rows + 2));
 			grid.add(newPlayerForename, 1, rows + 2);
 			grid.add(newPlayerSurname, 2, rows + 2);
