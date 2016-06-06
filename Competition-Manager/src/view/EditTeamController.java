@@ -39,13 +39,13 @@ public class EditTeamController extends Thread {
 			TextField number = new TextField();
 			
 			//pane.setPrefHeight(pane.getHeight() + grid.getPrefHeight());
-			pane.setMinHeight(pane.getHeight() + grid.getPrefHeight());
+			//pane.setMinHeight(pane.getHeight() + grid.getPrefHeight());
 			grid.add(player, 0, (rows + 2));
 			grid.add(newPlayerForename, 1, rows + 2);
 			grid.add(newPlayerSurname, 2, rows + 2);
 			grid.add(number, 4, rows + 2);
 		} else {
-			nope.setText("Sie haben bereits die maximal mögliche Anzahl an Spielern erreicht.");
+			nope.setText("Sie haben bereits die maximal mï¿½gliche Anzahl an Spielern erreicht.");
 		}
 	}
 	
