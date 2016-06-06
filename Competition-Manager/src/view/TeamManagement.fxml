@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="540.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TeamManagementController">
+<AnchorPane prefHeight="540.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TeamManagementController">
    <children>
       <SplitPane dividerPositions="0.34965034965034963" prefHeight="540.0" prefWidth="860.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -52,7 +52,6 @@
                     </rowConstraints>
                      <children>
                         <Label text="Schule" />
-                        <Label text="Trainer" GridPane.rowIndex="1" />
                         <Label text="Spieler 1" GridPane.rowIndex="2" />
                         <Label text="Spieler 2" GridPane.rowIndex="3" />
                         <Label text="Spieler 3" GridPane.rowIndex="4" />
@@ -65,7 +64,6 @@
                         <Label text="Spieler 10" GridPane.rowIndex="11" />
                         <Label text="Spieler 11" GridPane.rowIndex="12" />
                         <Label text="Label" GridPane.columnIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />

@@ -2,8 +2,11 @@ package view;
 
 import java.io.IOException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.HBox;
 
 public class GameController {
 	
@@ -12,10 +15,14 @@ public class GameController {
 	@FXML
 	private Button team1;
 	
+	@FXML
+	private HBox hbox1;
+	
 
+		
 	@FXML
 	private void showTeam() throws IOException {
-		main.showNewScene("Game.fxml", "Teamanzeige");
+		main.showNewScene("ShowTeam.fxml", "Teamanzeige");
 	}
 
 }

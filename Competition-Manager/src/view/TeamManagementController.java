@@ -8,10 +8,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import other.Team;
 
-public class TeamManagementController extends Thread {
+public class TeamManagementController {
 
-	private Integer teamID;
-	private String teamSchool;
+	
 
 	
 	
@@ -42,9 +41,6 @@ public class TeamManagementController extends Thread {
 	
 	@FXML
 	private Label school;
-	
-	@FXML
-	private Label trainer;
 	
 	@FXML
 	private Label player1;
