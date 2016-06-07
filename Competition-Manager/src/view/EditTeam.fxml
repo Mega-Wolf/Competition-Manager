@@ -1,131 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditTeamController">
    <children>
-      <GridPane AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="301.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="78.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label text="Schule" GridPane.rowIndex="1" />
-            <Label text="Trainer" GridPane.rowIndex="2" />
-            <Label text="Torwart" GridPane.rowIndex="3" />
-            <Label text="Verteidiger" GridPane.rowIndex="4" />
-            <Label text="Verteidiger" GridPane.rowIndex="5" />
-            <Label text="Außenläufer" GridPane.rowIndex="6" />
-            <Label text="Mittelläufer" GridPane.rowIndex="7" />
-            <Label text="Außenläufer" GridPane.rowIndex="8" />
-            <Label text="Rechtsaußen" GridPane.rowIndex="9" />
-            <Label text="Halbrechter" GridPane.rowIndex="10" />
-            <Label text="Mittelstürmer" GridPane.rowIndex="11" />
-            <Label text="Halblinker" GridPane.rowIndex="12" />
-            <Label text="Linksaußen" GridPane.rowIndex="13" />
-            <ChoiceBox prefHeight="26.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField promptText="Nachname, Vorname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField promptText="Nachname, Vorname" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField promptText="Nachname, Vorname" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField promptText="Nachname, Vorname" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField promptText="Nachname, Vorname" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField promptText="Nachname, Vorname" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <TextField promptText="Nachname, Vorname" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <TextField promptText="Nachname, Vorname" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            <TextField promptText="Nachname, Vorname" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-            <TextField promptText="Nachname, Vorname" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-            <TextField promptText="Nachname, Vorname" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-            <TextField promptText="Nachname, Vorname" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="127.0" text="Rückennr." textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label alignment="CENTER" contentDisplay="CENTER" text="1" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </Label>
-            <Label text="2" GridPane.columnIndex="2" GridPane.rowIndex="4">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </Label>
-            <Label text="3" GridPane.columnIndex="2" GridPane.rowIndex="5">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </Label>
-            <Label text="4" GridPane.columnIndex="2" GridPane.rowIndex="6">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </Label>
-            <Label text="5" GridPane.columnIndex="2" GridPane.rowIndex="7">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </Label>
-            <Label text="6" GridPane.columnIndex="2" GridPane.rowIndex="8">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </Label>
-            <Label text="7" GridPane.columnIndex="2" GridPane.rowIndex="9">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </Label>
-            <Label text="8" GridPane.columnIndex="2" GridPane.rowIndex="10">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </Label>
-            <Label text="9" GridPane.columnIndex="2" GridPane.rowIndex="11">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </Label>
-            <Label text="10" GridPane.columnIndex="2" GridPane.rowIndex="12">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </Label>
-            <Label text="11" GridPane.columnIndex="2" GridPane.rowIndex="13">
-               <GridPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </GridPane.margin>
-            </Label>
-         </children>
-      </GridPane>
-      <ButtonBar layoutX="250.0" layoutY="511.0" prefHeight="40.0" prefWidth="236.0" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="10.0">
+      <ScrollPane prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <content>
+          <AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="428.0" prefWidth="480.0">
+               <children>
+                  <GridPane fx:id="grid" hgap="5.0" prefHeight="428.0" prefWidth="500.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="19.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="91.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="153.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="148.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="22.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="65.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="30.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Schule" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Spieler 1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Spieler 2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Spieler 3" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="Spieler 4" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label text="Spieler 5" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label text="Spieler 6" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label text="Spieler 7" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Label text="Spieler 8" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <Label text="Spieler 9" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                        <Label text="Spieler 10" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                        <Label text="Spieler 11" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                        <TextField promptText="Nachname" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <TextField promptText="Nachname" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                        <TextField promptText="Nachname" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                        <TextField promptText="Nachname" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                        <TextField promptText="Nachname" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                        <TextField promptText="Nachname" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                        <TextField promptText="Nachname" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                        <TextField promptText="Nachname" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+                        <TextField promptText="Nachname" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+                        <TextField promptText="Nachname" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+                        <TextField promptText="Nachname" GridPane.columnIndex="3" GridPane.rowIndex="13" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="127.0" text="Nr." textAlignment="CENTER" wrapText="true" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                        <TextField promptText="Abkürzung" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <TextField promptText="Vollständiger Name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField promptText="Vorname" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="9" />
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="10" />
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="11" />
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="12" />
+                        <TextField GridPane.columnIndex="5" GridPane.rowIndex="13" />
+                        <TextField promptText="Vorname" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <TextField promptText="Vorname" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <TextField promptText="Vorname" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <TextField promptText="Vorname" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                        <TextField promptText="Vorname" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                        <TextField promptText="Vorname" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                        <TextField promptText="Vorname" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                        <TextField promptText="Vorname" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                        <TextField promptText="Vorname" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                        <TextField promptText="Vorname" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <ButtonBar layoutX="250.0" layoutY="546.0" prefHeight="40.0" prefWidth="413.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0">
         <buttons>
+            <Button mnemonicParsing="false" onAction="#addPlayerView" prefHeight="25.0" text="Spieler hinzufügen" />
           <Button mnemonicParsing="false" text="Speichern" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" text="Verwerfen" />
+            <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="113.0" text="Verwerfen" />
         </buttons>
       </ButtonBar>
+      <Label fx:id="nope" layoutX="117.0" layoutY="729.0" AnchorPane.bottomAnchor="42.0" AnchorPane.rightAnchor="14.0" />
    </children>
 </AnchorPane>

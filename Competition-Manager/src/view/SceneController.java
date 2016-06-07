@@ -14,18 +14,23 @@ public class SceneController {
 	}
 	
 	@FXML
-	public void setHelpView() throws IOException {
-		main.setCenterContent("Help.fxml");
-	}
-	
-	@FXML
-	public void editTeam() throws IOException {
-		main.showNewScene("EditTeam.fxml", "Team bearbeiten");
-	}
-	
-	@FXML
 	public void setGame() throws IOException {
 		main.setCenterContent("Game.fxml");
+	}
+	
+	@FXML
+	public void setGameManagement() throws IOException {
+		main.setCenterContent("GameManagement.fxml");
+	}
+	
+	@FXML
+	public void setContactView() throws IOException {
+		main.setCenterContent("Contact.fxml");
+	}
+
+	@FXML
+	public void setHelpView() throws IOException {
+		main.setCenterContent("Help.fxml");
 	}
 
 }
