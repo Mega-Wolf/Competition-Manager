@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ShowTeamController">
                <children>
-                  <GridPane layoutX="178.0" layoutY="218.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+                  <GridPane fx:id="pane" layoutX="178.0" layoutY="218.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="425.0" minWidth="10.0" prefWidth="386.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="114.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="425.0" minWidth="10.0" prefWidth="226.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -36,7 +32,7 @@
                     </rowConstraints>
                      <children>
                         <Label text="Schule" />
-                        <Label text="Trainer" GridPane.rowIndex="1" />
+                        <Label GridPane.rowIndex="1" />
                         <Label text="Spieler 1" GridPane.rowIndex="2" />
                         <Label text="Spieler 2" GridPane.rowIndex="3" />
                         <Label text="Spieler 3" GridPane.rowIndex="4" />
@@ -48,8 +44,7 @@
                         <Label text="Spieler 9" GridPane.rowIndex="10" />
                         <Label text="Spieler 10" GridPane.rowIndex="11" />
                         <Label text="Spieler 11" GridPane.rowIndex="12" />
-                        <Label text="Label" GridPane.columnIndex="1" />
-                        <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="school" text="Label" GridPane.columnIndex="1" />
                         <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -63,6 +58,10 @@
                         <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                      </children>
                   </GridPane>
+      <ButtonBar layoutX="186.0" layoutY="446.0" prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+          <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancel" text="Schließen" />
+        </buttons>
+      </ButtonBar>
                  </children>
                 </AnchorPane>
-

@@ -55,6 +55,7 @@ public class TeamManagementController {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+					server.close();
 					
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -17,7 +17,7 @@ import network.Operation;
 import other.Player;
 import other.Team;
 
-public class EditTeamController extends Thread {
+public class EditTeamController {
 	
 	
 	

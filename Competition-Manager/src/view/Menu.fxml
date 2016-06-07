@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SceneController">
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SceneController">
    <top>
       <Label text="Herzlich Willkommen zum Verwaltungsprogramm des diesjährigen Fußballturniers!" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
@@ -32,7 +32,7 @@
                   <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="180.0" text="Spielverwaltung">
+            <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#setGameManagement" prefHeight="39.0" prefWidth="180.0" text="Spielverwaltung">
                <font>
                   <Font size="18.0" />
                </font>
@@ -48,7 +48,7 @@
                   <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="108.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="180.0" text="Kontakt">
+            <Button layoutX="10.0" layoutY="108.0" mnemonicParsing="false" onAction="#setContactView" prefHeight="39.0" prefWidth="180.0" text="Kontakt">
                <font>
                   <Font size="18.0" />
                </font>

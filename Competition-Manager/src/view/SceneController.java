@@ -22,6 +22,11 @@ public class SceneController {
 	public void setGameManagement() throws IOException {
 		main.setCenterContent("GameManagement.fxml");
 	}
+	
+	@FXML
+	public void setContactView() throws IOException {
+		main.setCenterContent("Contact.fxml");
+	}
 
 	@FXML
 	public void setHelpView() throws IOException {
