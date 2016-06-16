@@ -43,8 +43,13 @@ public class EditTeamController {
 	@FXML
 	private TextField player1Number;
 	
+	
+	
 	@FXML
 	private TextField school; 
+	
+	@FXML
+	private TextField schoolShort;
 	
 	@FXML
 	private TextField player2;
@@ -88,6 +93,8 @@ public class EditTeamController {
 	}
 	
 	public void saving() throws UnknownHostException, IOException {
+		
+		
 		
 		Thread fu = new Thread(new Runnable() {
 			

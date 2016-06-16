@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.List;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,12 +13,16 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import network.Operation;
 import other.Team;
 
 public class TeamManagementController {
 	
 	Main main = new Main();
+	
+	Team testingTeam1 = new Team(1, "Gottlieb-Daimler-Gymnasium");
+	Team testingTeam2 = new Team(2, "Wagenburg-Gymnasium");
 	
 	// Switching Scenes
 	@FXML
@@ -50,7 +55,7 @@ public class TeamManagementController {
 					try (ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream()); ObjectInputStream in = new ObjectInputStream(server.getInputStream());) {
 							out.writeObject(Operation.GET_TEAM);
 							out.writeObject(id);
-							
+							out.writeObject(Operation.GET_PLAYER);
 							team = (Team) in.readObject();
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -70,10 +75,10 @@ public class TeamManagementController {
 		
 	//FXML Stuff
 	@FXML
-	private TableView<Team> teamTable;
+	private TableView<TeamManagementController> teamTable;
 	
 	@FXML
-	private TableColumn<TeamManagementController, Integer> showTeamID;
+	private TableColumn<TeamManagementController, String> showTeamID;
 	
 	@FXML
 	private TableColumn<TeamManagementController, String> showTeamSchool;
@@ -90,7 +95,7 @@ public class TeamManagementController {
 	public TeamManagementController() {
 	}
 	
-	private SimpleStringProperty teamSchoolProp() {
+	private SimpleStringProperty teamSchoolProp(Team team) {
 		teamSchoolProp.set(team.getSchool());
 		return teamSchoolProp;
 	}
@@ -99,12 +104,11 @@ public class TeamManagementController {
 		teamIDProp.set(teamID);
 		return teamIDProp;
 	}
-	@FXML
-	private void setTableContent() {
-		
-		showTeamSchool.setCellValueFactory(cellData -> cellData.getValue().teamSchoolProp());
-	}
 	
+	private void initialize() {
+		showTeamSchool.setCellValueFactory(new PropertyValueFactory<TeamManagementController, String>(testingTeam1.getSchool()));
+		showTeamID.setCellValueFactory(new PropertyValueFactory<TeamManagementController, String>("1"));
+	}
 	
 	
 	
