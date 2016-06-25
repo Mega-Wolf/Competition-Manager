@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import other.Player;
+import other.Team;
 
 public class Main extends Application {
 
@@ -47,8 +49,6 @@ public class Main extends Application {
 	public void clearCenter() {
 		root.setCenter(null);
 	}
-	
-	
 	
 	public static void main(String[] args) {
 		launch(args);
