@@ -1,6 +1,7 @@
 package view;
 
 import java.io.IOException;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import other.Player;
-import other.Team;
+import view.TeamManagementController.TeamProp;
 
 public class Main extends Application {
 
@@ -34,6 +35,7 @@ public class Main extends Application {
 		root.setCenter(centerPane);
 	}
 	
+	//Not sure if needed anymore
 	public void showNewScene(String resource, String stage) throws IOException {
 		AnchorPane newPane = FXMLLoader.load(getClass().getResource(resource));
 		
@@ -44,6 +46,25 @@ public class Main extends Application {
 		Scene newScene = new Scene(newPane);
 		newStage.setScene(newScene);
 		newStage.showAndWait();
+	}
+	
+	public boolean showTeamEditDialog(TeamProp team, List<Player> players) throws IOException{
+		AnchorPane newPane = FXMLLoader.load(getClass().getResource("EditTeamController.fxml"));
+		
+		Stage newStage = new Stage();
+		newStage.setTitle("Team bearbeiten");
+		newStage.initModality(Modality.APPLICATION_MODAL);
+		newStage.initOwner(primaryStage);
+		Scene newScene = new Scene(newPane);
+		newStage.setScene(newScene);
+		
+		EditTeamController controller = new EditTeamController();
+		controller.setEditDialog(newStage);
+		controller.setTeam(team, players);
+		
+		newStage.showAndWait();
+		
+		return controller.isOkClicked();
 	}
 	
 	public void clearCenter() {

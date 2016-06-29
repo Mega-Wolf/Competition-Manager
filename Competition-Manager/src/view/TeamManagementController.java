@@ -14,7 +14,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -29,10 +30,16 @@ public class TeamManagementController {
 	Main main = new Main();
 	
 	// Switching Scenes
+	// TODO needs new view
 	@FXML
 	public void editTeam() throws IOException {
-		main.showNewScene("EditTeam.fxml", "Team bearbeiten");
+		TeamProp selectedTeam = teamTable.getSelectionModel().getSelectedItem();
+		boolean okClicked = main.showTeamEditDialog(selectedTeam, playerData);
+		if(okClicked) {
+			setPlayerData(selectedTeam);
+		}
 	}
+	
 	
 	@FXML
 	public void newTeam() throws IOException {
@@ -103,17 +110,23 @@ public class TeamManagementController {
 	// shitty inner class to get team into table view
 	public class TeamProp extends Team {
 		private final SimpleStringProperty school;
+		private final SimpleStringProperty shortSchool;
 		private int id;
 
-		public TeamProp(int id, String school) {
+		public TeamProp(int id, String school, String shortSchool) {
 			super(id, school);
 			this.school = new SimpleStringProperty(school);
 			this.id = id;
+			this.shortSchool = new SimpleStringProperty(shortSchool);
 		}
 		
 		// GETTER
 		public String getSchool() {
 			return school.get();
+		}
+		
+		public String getShortSchool() {
+			return shortSchool.get();
 		}
 		
 		public int getId() {
@@ -124,17 +137,33 @@ public class TeamManagementController {
 		public void setSchool(String school) {
 			this.school.set(school);
 		}
+		
+		public void setShortSchool(String shortSchool) {
+			this.shortSchool.set(shortSchool);
+		}
 	}
 	
 	// Test list of teams - have to be read in by 
-	private final ObservableList<TeamProp> teamData = FXCollections.observableArrayList(new TeamProp(1, "Gottlieb-Daimler-Gymnasium"), new TeamProp(2, "Wagenburg-Gymnasium"));
+	private final ObservableList<TeamProp> teamData = FXCollections.observableArrayList(new TeamProp(1, "Gottlieb-Daimler-Gymnasium", "GDG"), new TeamProp(2, "Wagenburg-Gymnasium", "WG"));
+	
+	// Own method to store saved teams
+	public void addToTeamData(TeamProp team) {
+		teamData.add(team);
+	}
+	
+	
 	
 	// Test list of some players from different teams
 	private final List<Player> playerData = new ArrayList<Player>(Arrays.asList(new Player(66, 1, "Heinz Heinrich", "Heinzer"), new Player(88, 1, "Conrad", "Ültje"),
 			new Player(23, 1, "Stefan", "Pigman"), new Player(4, 1, "Manuel", "Fokussieren"), new Player(24, 1, "Bore", "Dom"), new Player(6, 1, "Hans", "Wurst"),
 			new Player(13, 1, "Faber", "Castell"), new Player(8, 1, "Pudel S.", "Kern"), new Player(9, 1, "Ketch", "Up"), new Player(10, 1, "Spool", "Mittel"), 
 			new Player(11, 1, "Dis", "Turbed"), new Player(2, 2, "Sergej", "Jegres")));
-		
+	
+	// Own method to store saved players
+	public void addToPlayerData(Player player) {
+		playerData.add(player);
+	}
+	
 	//FXML Stuff
 	@FXML
 	private TableView<TeamProp> teamTable;
@@ -144,6 +173,9 @@ public class TeamManagementController {
 	
 	@FXML
 	private GridPane grid;
+	
+	@FXML
+	private Button newTeam;
 	
 	
 	public TeamManagementController() {
@@ -185,7 +217,6 @@ public class TeamManagementController {
 				
 				countRow++;
 			}
-			
 		}
 	}
 	
