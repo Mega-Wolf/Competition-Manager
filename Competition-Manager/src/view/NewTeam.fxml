@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
@@ -12,94 +13,42 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NewTeamController">
    <children>
-      <ScrollPane prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <content>
-          <AnchorPane fx:id="pane" minHeight="0.0" minWidth="0.0" prefHeight="428.0" prefWidth="480.0">
+      <ScrollPane prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <GridPane fx:id="grid" hgap="5.0" prefHeight="25.0" prefWidth="400.0" vgap="5.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="153.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="148.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="65.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <GridPane fx:id="grid" hgap="5.0" prefHeight="428.0" prefWidth="500.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="91.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="153.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="148.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="65.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label text="Schule" />
-                        <Label text="Spieler 1" GridPane.rowIndex="2" />
-                        <Label text="Spieler 2" GridPane.rowIndex="3" />
-                        <Label text="Spieler 3" GridPane.rowIndex="4" />
-                        <Label text="Spieler 4" GridPane.rowIndex="5" />
-                        <Label text="Spieler 5" GridPane.rowIndex="6" />
-                        <Label text="Spieler 6" GridPane.rowIndex="7" />
-                        <Label text="Spieler 7" GridPane.rowIndex="8" />
-                        <Label text="Spieler 8" GridPane.rowIndex="9" />
-                        <Label text="Spieler 9" GridPane.rowIndex="10" />
-                        <Label text="Spieler 10" GridPane.rowIndex="11" />
-                        <Label text="Spieler 11" GridPane.rowIndex="12" />
-                        <TextField fx:id="player1Surname" promptText="Nachname" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <TextField promptText="Nachname" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                        <TextField promptText="Nachname" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                        <TextField promptText="Nachname" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                        <TextField promptText="Nachname" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                        <TextField promptText="Nachname" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                        <TextField promptText="Nachname" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-                        <TextField promptText="Nachname" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                        <TextField promptText="Nachname" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                        <TextField promptText="Nachname" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-                        <TextField promptText="Nachname" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="127.0" text="Rückennr." textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <TextField fx:id="schoolShort" promptText="Abkürzung" GridPane.columnIndex="2" />
-                        <TextField fx:id="school" promptText="Vollständiger Name" GridPane.columnIndex="1" />
-                        <TextField fx:id="player1Forename" promptText="Vorname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="player1Number" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="9" />
-                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="10" />
-                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="11" />
-                        <TextField GridPane.columnIndex="3" GridPane.rowIndex="12" />
-                        <TextField promptText="Vorname" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <TextField promptText="Vorname" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <TextField promptText="Vorname" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <TextField promptText="Vorname" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <TextField promptText="Vorname" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <TextField promptText="Vorname" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <TextField promptText="Vorname" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                        <TextField promptText="Vorname" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                        <TextField promptText="Vorname" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                        <TextField promptText="Vorname" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                     </children>
-                  </GridPane>
+                  <TextField fx:id="abbreviation" prefHeight="23.0" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="school" prefHeight="23.0">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </TextField>
                </children>
-            </AnchorPane>
-        </content>
+            </GridPane>
+         </content>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
       </ScrollPane>
       <ButtonBar layoutX="250.0" layoutY="546.0" prefHeight="40.0" prefWidth="413.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0">
         <buttons>
-            <Button mnemonicParsing="false" onAction="#addPlayerView" prefHeight="25.0" text="Spieler hinzufügen" />
+            <Button fx:id="addPlayer" mnemonicParsing="false" onAction="#addMorePlayers" prefHeight="25.0" text="Spieler hinzufügen" />
           <Button mnemonicParsing="false" text="Speichern" />
             <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="113.0" text="Verwerfen" />
         </buttons>
       </ButtonBar>
-      <Label fx:id="nope" layoutX="117.0" layoutY="729.0" AnchorPane.bottomAnchor="42.0" AnchorPane.rightAnchor="14.0" />
+      <Label fx:id="informationLabel" layoutX="117.0" layoutY="729.0" AnchorPane.bottomAnchor="42.0" AnchorPane.rightAnchor="14.0" />
    </children>
 </AnchorPane>

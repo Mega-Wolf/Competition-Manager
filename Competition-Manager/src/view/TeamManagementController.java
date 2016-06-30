@@ -29,21 +29,9 @@ public class TeamManagementController {
 	
 	Main main = new Main();
 	
-	// Switching Scenes
-	// TODO needs new view
-	@FXML
-	public void editTeam() throws IOException {
-		TeamProp selectedTeam = teamTable.getSelectionModel().getSelectedItem();
-		boolean okClicked = main.showTeamEditDialog(selectedTeam, playerData);
-		if(okClicked) {
-			setPlayerData(selectedTeam);
-		}
-	}
-	
-	
 	@FXML
 	public void newTeam() throws IOException {
-		main.showNewScene("EditTeam.fxml", "Neues Team eintragen");
+		main.showNewScene("NewTeam.fxml", "Neues Team eintragen");
 	}
 	
 	//Trying to read in team
