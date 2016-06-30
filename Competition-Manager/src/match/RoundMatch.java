@@ -8,25 +8,21 @@ import other.Team;
 public class RoundMatch extends Match{
 
 	/* Variables */
-	private Round round;
+	private int roundID;
 	private int[] goalsAfterOvertime = new int[2];
 	private int[] goalsAfterPenalty = new int[2];
 	
 	/* Constructor */
-	public RoundMatch(Team team0, Team team1, Date kickoff, Round round) {
-		super(team0, team1, kickoff);
-		this.round = round;
-	}
-	
-	public RoundMatch(Team team0, Team team1, Date kickoff, Round round, int goals0, int goals1) {
-		this(team0, team1, kickoff, round);
-		goals[0] = goals0;
-		goals[1] = goals1;
+	public RoundMatch(int[] teamIDs, Date kickoff, int roundID) {
+		super(teamIDs, kickoff);
+		this.roundID = roundID;
 	}
 	
 	/* Setter */
+	//TODO: Set everything at once
+	/*
 	public void setGoalsAfterOvertime(int goals0, int goals1) {
-		if (goals[0] == goals[1]) {
+		if (goalsRegular[0] == goalsRegular[1]) {
 			goalsAfterOvertime[0] = goals0;
 			goalsAfterOvertime[1] = goals1;
 		} else {
@@ -43,13 +39,14 @@ public class RoundMatch extends Match{
 		}
 		
 	}
-	
+	*/
 	/* Getter */
-	public Round getRound() {
-		return round;
+	public int getRoundID() {
+		return roundID;
+	}
+	
+	public int getWinner() {
+		//TODO: TODO
 	}
 
-	public Team getWinner() {
-		return teams[0]; //TODO
-	}
 }

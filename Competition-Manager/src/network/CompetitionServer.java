@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import match.Match;
+import other.Manager;
 import other.Player;
 import other.Team;
-import test.Manager;
 
 public class CompetitionServer {
 

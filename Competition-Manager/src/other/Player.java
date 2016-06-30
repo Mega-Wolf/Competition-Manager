@@ -14,24 +14,7 @@ public class Player {
 		this.forename = forename;
 		this.surname = surname;
 	}
-	
-	/* Setter */
-	public void setNumber(int number) {
-		this.number = number;
-	}
-	
-	public void setTeam(int team) {
-		this.team = team;
-	}
-
-	public void setForename(String forename) {
-		this.forename = forename;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-	
+		
 	/* Getter */
 	public int getNumber() {
 		return number;
