@@ -1,5 +1,5 @@
 package other;
-public class Player implements EqualWildCard<Player>{
+public class Player implements EqualWildCard{
 	
 	/* Variables */
 	private int number;
@@ -34,16 +34,20 @@ public class Player implements EqualWildCard<Player>{
 	
 	/* Overrides */
 	@Override
-	public boolean equals(Object arg0) {		
-		if (arg0 instanceof Player) {
-			Player test = (Player) arg0;
+	public boolean equals(Object obj) {		
+		if (obj instanceof Player) {
+			Player test = (Player) obj;
 			return (number == test.number) && (team == test.team) && (surname.equals(test.surname)) && (forename.equals(test.forename));
 		}
 		return false;
 	}
 
 	@Override
-	public boolean equalsWC(Player obj) {
-		return (obj.number == -1 || number == obj.number) && (obj.team == -1 || team == obj.team) && (obj.surname == null || surname.equals(obj.surname)) && (obj.forename == null || forename.equals(obj.forename));
+	public boolean equalsWC(Object obj) {
+		if (obj instanceof Player) {
+			Player test = (Player) obj;
+			return (test.number == -1 || number == test.number) && (test.team == -1 || team == test.team) && (test.surname == null || surname.equals(test.surname)) && (test.forename == null || forename.equals(test.forename));
+		}
+		return false;
 	}
 }

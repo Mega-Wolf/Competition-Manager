@@ -1,5 +1,5 @@
 package other;
 
-public interface EqualWildCard<T> {
-	public boolean equalsWC(T obj);
+public interface EqualWildCard {
+	public boolean equalsWC(Object obj);
 }
