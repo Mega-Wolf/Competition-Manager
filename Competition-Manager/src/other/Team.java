@@ -1,6 +1,6 @@
 package other;
 
-public class Team{
+public class Team implements EqualWildCard<Team>{
 	
 	/* Consts */
 	public static final int TEAM_SIZE_MAX = 23;
@@ -29,8 +29,14 @@ public class Team{
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Team) {
-			return ((Team) obj).school.equals(school);
+			Team team = (Team) obj;
+			return team.school.equals(school) && team.abbreviation.equals(abbreviation);
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean equalsWC(Team obj) {
+		return (obj.school == null || obj.school.equals(school)) && (obj.abbreviation == null || obj.abbreviation.equals(abbreviation));
 	}
 }
