@@ -9,10 +9,16 @@ public class Player implements EqualWildCard{
 	
 	/* Constructor */
 	public Player(int number, int team, String forename, String surname) {
-		this.number = number;
-		this.team = team;
-		this.forename = forename;
-		this.surname = surname;
+		
+		//if ((number > 0 && number < 100) && forename.) {
+			this.number = number;
+			this.team = team;
+			this.forename = forename;
+			this.surname = surname;
+		//}
+		
+		
+		
 	}
 		
 	/* Getter */
