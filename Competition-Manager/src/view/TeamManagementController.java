@@ -99,9 +99,9 @@ public class TeamManagementController {
 	public class TeamProp extends Team {
 		private final SimpleStringProperty school;
 		private final SimpleStringProperty shortSchool;
-		private int id;
+		private String id;
 
-		public TeamProp(int id, String school, String shortSchool) {
+		public TeamProp(String id, String school, String shortSchool) {
 			super(id, school);
 			this.school = new SimpleStringProperty(school);
 			this.id = id;
@@ -117,7 +117,7 @@ public class TeamManagementController {
 			return shortSchool.get();
 		}
 		
-		public int getId() {
+		public String getId() {
 			return id;
 		}
 		
@@ -132,7 +132,7 @@ public class TeamManagementController {
 	}
 	
 	// Test list of teams - have to be read in by 
-	private final ObservableList<TeamProp> teamData = FXCollections.observableArrayList(new TeamProp(1, "Gottlieb-Daimler-Gymnasium", "GDG"), new TeamProp(2, "Wagenburg-Gymnasium", "WG"));
+	private final ObservableList<TeamProp> teamData = FXCollections.observableArrayList(new TeamProp("GDG", "Gottlieb-Daimler-Gymnasium", "GDG"), new TeamProp("WG", "Wagenburg-Gymnasium", "WG"));
 	
 	// Own method to store saved teams
 	public void addToTeamData(TeamProp team) {
@@ -208,8 +208,4 @@ public class TeamManagementController {
 		}
 	}
 	
-	
-	
-	
-
 }
