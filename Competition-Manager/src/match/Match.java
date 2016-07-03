@@ -9,13 +9,10 @@ public abstract class Match {
 	/* Variables */
 	protected int teamIDs[] = new int[2];
 	protected int goalsRegular[] = new int[2];
-	protected Date kickoff;
 	
 	/* Constructors */
-	public Match(int teamIDs[], Date kickoff) {
+	public Match(int teamIDs[]) {
 		this.teamIDs = teamIDs;
-		//TODO; chekArrays?
-		this.kickoff = kickoff;
 	}
 	
 	/* Setter */
@@ -47,8 +44,4 @@ public abstract class Match {
 		return Arrays.copyOf(teamIDs, 2);				// TODO; only used by server; should be no problem to pass the reference
 	}
 
-	
-	public Date getKickoff() {
-		return kickoff;
-	}
 }

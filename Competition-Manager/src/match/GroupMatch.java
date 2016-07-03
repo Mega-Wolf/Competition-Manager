@@ -16,8 +16,8 @@ public class GroupMatch extends Match {
 	private final int groupID;
 	
 	/* Constructors */
-	public GroupMatch(int[] teamIDs, Date kickoff, int groupID) {
-		super(teamIDs, kickoff);
+	public GroupMatch(int[] teamIDs, int groupID) {
+		super(teamIDs);
 		this.groupID = groupID;
 	}
 	

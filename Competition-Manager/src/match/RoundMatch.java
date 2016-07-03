@@ -13,8 +13,8 @@ public class RoundMatch extends Match{
 	private int[] goalsAfterPenalty = new int[2];
 	
 	/* Constructor */
-	public RoundMatch(int[] teamIDs, Date kickoff, int roundID) {
-		super(teamIDs, kickoff);
+	public RoundMatch(int[] teamIDs, int roundID) {
+		super(teamIDs);
 		this.roundID = roundID;
 	}
 	
