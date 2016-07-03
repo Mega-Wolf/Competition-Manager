@@ -15,15 +15,19 @@ import other.Team;
 
 public class CompetitionServer {
 
+	public static void main(String[] args) {
+		CompetitionServer cs = new CompetitionServer();
+	}
+	
 	public static final int PORT_NUMBER = 44532;
 	
 	//state variable needed
 	
 	Manager<Player> playerManager = new Manager<Player>();
 	Manager<Team> teamManager = new Manager<Team>();
-	Manager<Group> groupManager = new Manager<Group>();
-	Manager<GroupMatch> groupMatchManager = new Manager<GroupMatch>();
-	Manager<RoundMatch> roundMatchManager = new Manager<RoundMatch>();
+	//Manager<Group> groupManager = new Manager<Group>();
+	//Manager<GroupMatch> groupMatchManager = new Manager<GroupMatch>();
+	//Manager<RoundMatch> roundMatchManager = new Manager<RoundMatch>();
 	
 	
 	public CompetitionServer() {
@@ -31,9 +35,9 @@ public class CompetitionServer {
 		
 		managerMap.put(Operand.PLAYER, playerManager);
 		managerMap.put(Operand.TEAM, teamManager);
-		managerMap.put(Operand.GROUP, groupManager);
-		managerMap.put(Operand.GROUP_MATCH, groupMatchManager);
-		managerMap.put(Operand.ROUND_MATCH, roundMatchManager);
+		//managerMap.put(Operand.GROUP, groupManager);
+		//managerMap.put(Operand.GROUP_MATCH, groupMatchManager);
+		//managerMap.put(Operand.ROUND_MATCH, roundMatchManager);
 		
 		managerMap = Collections.unmodifiableMap(managerMap);
 		
