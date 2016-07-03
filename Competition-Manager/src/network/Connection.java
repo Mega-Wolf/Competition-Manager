@@ -43,10 +43,10 @@ public class Connection extends Thread {
 			handleAdd(operand);
 			break;
 		case INSTRUCTION:
-			handleInstruction(operand);
+			//handleInstruction(operand);
 			break;
 		case REMOVE:
-			handleRemove(operand);
+			//handleRemove(operand);
 			break;
 		}
 	}

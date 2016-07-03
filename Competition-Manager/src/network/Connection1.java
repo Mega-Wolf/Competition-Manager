@@ -2,8 +2,8 @@ package network;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
 
 import other.Manager;
 import other.Player;
@@ -16,6 +16,7 @@ public class Connection1 extends Connection {
 		super(socket, managerMap);
 	}
 
+	@SuppressWarnings({ "incomplete-switch", "unchecked" })
 	@Override
 	protected void reactOnInput(Operation operation, Operand operand) throws ClassNotFoundException, IOException {
 		super.reactOnInput(operation, operand);
@@ -84,6 +85,19 @@ public class Connection1 extends Connection {
 				//synchronization order must be same as above (ADD; PLAYER) to prevent deadlock
 				synchronized (managerMap.get(Operand.TEAM)) {
 					synchronized (managerMap.get(Operand.PLAYER)) {
+						Set<Integer> teamIDSet = managerMap.get(Operand.TEAM).getMatching(new Team(null, null)).keySet();
+						
+						if (teamIDSet.size() != 16) {
+							//TODO; Exception
+						}
+						
+						for (Integer teamID : teamIDSet) {
+							int teamSize = managerMap.get(Operand.PLAYER).getMatching(new Player(-1, teamID, null, null)).size(); 
+							if (teamSize < Team.TEAM_SIZE_MIN || teamSize > Team.TEAM_SIZE_MAX) {
+								//TODO; Exception
+							}
+						}
+						
 						managerMap.get(Operand.TEAM).lock();
 						managerMap.get(Operand.PLAYER).lock();
 					}
