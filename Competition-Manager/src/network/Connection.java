@@ -58,10 +58,11 @@ public class Connection extends Thread {
 	 * @throws IOException
 	 */
 	private void handleAdd(Operand operand) throws ClassNotFoundException, IOException {
+		
+		Manager<Player> playerManager = (Manager<Player>) managerMap.get(Operand.PLAYER);
+		Manager<Team> teamManager = (Manager<Team>) managerMap.get(Operand.TEAM);
 		switch (operand) {
-		case PLAYER:
-			Manager<Player> playerManager = (Manager<Player>) managerMap.get(Operand.PLAYER);
-			Manager<Team> teamManager = (Manager<Team>) managerMap.get(Operand.TEAM);
+		case PLAYER:	
 			Player addPlayer = (Player) in.readObject();
 			// synchronized both, because the teamID must exist and the player number must be unique inside the team
 			synchronized (teamManager) {
@@ -73,30 +74,31 @@ public class Connection extends Thread {
 							allowed = false;
 						}
 						if (allowed) {
-							playerManager.add(addPlayer);
+							out.writeObject(playerManager.add(addPlayer));
 						} else {
 							//TODO; Exception
+							out.writeObject(-1);
 						}
 					}
 				} else {
 					//TODO; Exception
+					out.writeObject(-1);
 				}
 			}
 			break;
 		case TEAM:
 			Team addTeam = (Team) in.readObject();
 			// synchronization needed, because the write must be directly after the read
-			synchronized (managerMap.get(Operand.TEAM)) {
+			synchronized (teamManager) {
 				boolean allowed = true;
-				if (!managerMap.get(Operand.TEAM).getMatching(new Team(null, addTeam.getAbbreviation())).isEmpty()
-						|| !managerMap.get(Operand.TEAM).getMatching(new Team(addTeam.getSchool(), null))
-								.isEmpty()) {
+				if (!teamManager.getMatching(new Team(null, addTeam.getAbbreviation())).isEmpty() || !teamManager.getMatching(new Team(addTeam.getSchool(), null)).isEmpty()) {
 					allowed = false;
 				}
 				if (allowed) {
-					((Manager<Team>) managerMap.get(Operand.TEAM)).add(addTeam);
+					out.writeObject(teamManager.add(addTeam));
 				} else {
 					//TODO; Exception
+					out.writeObject(-1);
 				}
 			}
 			break;
