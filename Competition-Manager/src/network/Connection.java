@@ -7,7 +7,14 @@ import java.net.Socket;
 import java.util.Map;
 
 import other.Manager;
+import other.Player;
+import other.Team;
 
+/**
+ * This class handles a connection between the server and a client.
+ */
+//Should have been divided into state-pattern first, but this turned out to be even more complicated;
+//therefore sticked to the nested switch stuff
 public class Connection extends Thread {
 	/* Variables */
 	protected Map<Operand, Manager<?>> managerMap;
@@ -32,58 +39,75 @@ public class Connection extends Thread {
 		case GET_MATCHING:
 			out.writeObject(manager.getMatching(in.readObject()));
 			break;
-		}
-		
-		/*
-		
-		switch (operation) {
-		case ADD_PLAYER:
-			Player newPlayer = (Player) in.readObject();
-			playerManager.add(newPlayer, (p) -> {
-				List<Player> teamList = playerManager.getMatching(new Player(-1, p.getTeam(), null, null)).values()
-						.stream().collect(Collectors.toList());
-				return teamList.size() < Team.TEAM_SIZE_MAX
-						&& teamList.stream().noneMatch(p2 -> p2.getNumber() == newPlayer.getNumber());
-			});
+		case ADD:
+			handleAdd(operand);
 			break;
-		case CREATE_GROUPS:
+		case INSTRUCTION:
+			handleInstruction(operand);
 			break;
-		case GET_GROUP:
-			break;
-		case GET_MATCH:
-			break;
-		case GET_PLAYER:
-			break;
-		case GET_TEAM:
-			break;
-		case MATCHING_GROUPS:
-			break;
-		case MATCHING_MATCHES:
-			break;
-		case MATCHING_PLAYERS:
-			Player matchingPlayer = (Player) in.readObject();
-			out.writeObject(playerManager.getMatching(matchingPlayer));
-			break;
-		case MATCHING_TEAMS:
-			break;
-		case REMOVE_PLAYER:
-			break;
-		case UPDATE_MATCH:
-			break;
-		case UPDATE_PLAYER:
-			break;
-		case UPDATE_TEAM:
-			break;
-		default:
+		case REMOVE:
+			handleRemove(operand);
 			break;
 		}
-		
-		*/
 	}
+	
+	/**
+	 * Handles the insertion of Players and Teams
+	 * @param operand {@link Operand.PLAYER} or {@link Operand.TEAM}
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
+	private void handleAdd(Operand operand) throws ClassNotFoundException, IOException {
+		switch (operand) {
+		case PLAYER:
+			Manager<Player> playerManager = (Manager<Player>) managerMap.get(Operand.PLAYER);
+			Manager<Team> teamManager = (Manager<Team>) managerMap.get(Operand.TEAM);
+			Player addPlayer = (Player) in.readObject();
+			// synchronized both, because the teamID must exist and the player number must be unique inside the team
+			synchronized (teamManager) {
+				if (teamManager.get(addPlayer.getTeam()) != null) {
+					// if the teamID does not exist, the players do not have to be checked
+					synchronized (playerManager) {
+						boolean allowed = true;
+						if (!playerManager.getMatching(new Player(addPlayer.getNumber(), addPlayer.getTeam(), null, null)).isEmpty()) {
+							allowed = false;
+						}
+						if (allowed) {
+							playerManager.add(addPlayer);
+						} else {
+							//TODO; Exception
+						}
+					}
+				} else {
+					//TODO; Exception
+				}
+			}
+			break;
+		case TEAM:
+			Team addTeam = (Team) in.readObject();
+			// synchronization needed, because the write must be directly after the read
+			synchronized (managerMap.get(Operand.TEAM)) {
+				boolean allowed = true;
+				if (!managerMap.get(Operand.TEAM).getMatching(new Team(null, addTeam.getAbbreviation())).isEmpty()
+						|| !managerMap.get(Operand.TEAM).getMatching(new Team(addTeam.getSchool(), null))
+								.isEmpty()) {
+					allowed = false;
+				}
+				if (allowed) {
+					((Manager<Team>) managerMap.get(Operand.TEAM)).add(addTeam);
+				} else {
+					//TODO; Exception
+				}
+			}
+			break;
+		}
+	}
+	
+	
 
 	/* Overrides */
 	@Override
-	public final void run() {
+	public void run() {
 		while (true) {
 			try {
 				Operation operation = (Operation) in.readObject();
