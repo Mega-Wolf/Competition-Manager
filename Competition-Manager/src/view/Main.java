@@ -11,7 +11,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import other.Player;
-import view.TeamManagementController.TeamProp;
 
 public class Main extends Application {
 
