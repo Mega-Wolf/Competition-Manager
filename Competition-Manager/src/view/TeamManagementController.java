@@ -21,7 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import network.Operation;
+import network.OperationOld;
 import other.Player;
 import other.Team;
 
@@ -49,9 +49,9 @@ public class TeamManagementController {
 					server = new Socket("127.0.0.1",PORT_NUMBER);
 					
 					try (ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream()); ObjectInputStream in = new ObjectInputStream(server.getInputStream());) {
-							out.writeObject(Operation.GET_TEAM);
+							out.writeObject(OperationOld.GET_TEAM);
 							out.writeObject(id);
-							out.writeObject(Operation.GET_PLAYER);
+							out.writeObject(OperationOld.GET_PLAYER);
 							//team = (Team) in.readObject();
 					} catch (IOException e) {
 						e.printStackTrace();
