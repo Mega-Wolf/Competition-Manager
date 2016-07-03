@@ -30,11 +30,13 @@ public class Manager<V extends EqualWildCard> {
 	/**
 	 * Adds a new entry to the map
 	 * @param newV the new entry
+	 * @return the id of the new entry
 	 */
-	public /*synchronized*/ void add(V newV/*, Predicate<V> pred*/) {
+	public /*synchronized*/ int add(V newV/*, Predicate<V> pred*/) {
 		// must be synchronized, because the put must happen directly after the check
 		//if (pred.test(newV)) {
-			map.put(idCounter++, newV);
+			map.put(idCounter, newV);
+			return idCounter++;
 		//}
 	}
 	
