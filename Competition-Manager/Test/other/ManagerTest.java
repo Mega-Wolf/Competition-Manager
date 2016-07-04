@@ -13,7 +13,7 @@ public class ManagerTest {
 		Manager<Player> playerManager = new Manager<Player>();
 		playerManager.add(new Player(3,0,"Herbert","Grönemeier"));
 		playerManager.add(new Player(4,0,"Günther","Jauch"));
-		Map<Integer,Player> = playerManager.getMatching(new Player(-1,1,null,null));
+		Map<Integer,Player> meineDummeBehinderteListe = playerManager.getMatching(new Player(-1,1,null,null));
 	}
 	
 	@Test
@@ -21,7 +21,7 @@ public class ManagerTest {
 		Manager<Player> playerManager = new Manager<Player>();
 		playerManager.add(new Player(1,1,"Pablo","Picasso"));
 		playerManager.add(new Player(2,1,"Salvador","Dali"));
-		Map<Integer,Player> = playerManager.getMatching(new Player(-1,1,null,null));
+		Map<Integer,Player> meineAndereDummeBehinderteListe = playerManager.getMatching(new Player(-1,1,null,null));
 	}
 /*
 		playerManager.add(new Player(-2,3,"Anabel","Lee"));
