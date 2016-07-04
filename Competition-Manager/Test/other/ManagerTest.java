@@ -14,10 +14,10 @@ public class ManagerTest {
 		Manager<Player> playerManager = new Manager<Player>();
 		playerManager.add(new Player(3,0,"Herbert","Grönemeier"));
 		playerManager.add(new Player(4,0,"Günther","Jauch"));
-		Map<Integer,Player> meineDummeBehinderteListe = playerManager.getMatching(new Player(-1,1,null,null));
-		assertTrue(meineDummeBehinderteListe.size() == 2
-				&& meineDummeBehinderteListe.entrySet().contains("Herbert Grönemeier")
-				&& meineDummeBehinderteListe.entrySet().contains("Günther Jauch"));
+		Map<Integer,Player> List1 = playerManager.getMatching(new Player(-1,1,null,null));
+		assertTrue(List1.size() == 2
+				&& List1.entrySet().contains("Herbert Grönemeier")
+				&& List1.entrySet().contains("Günther Jauch"));
 	}
 	
 	@Test
@@ -25,10 +25,10 @@ public class ManagerTest {
 		Manager<Player> playerManager = new Manager<Player>();
 		playerManager.add(new Player(1,1,"Pablo","Picasso"));
 		playerManager.add(new Player(2,1,"Salvador","Dali"));
-		Map<Integer,Player> meineAndereDummeBehinderteListe = playerManager.getMatching(new Player(-1,1,null,null));
-		assertTrue(meineAndereDummeBehinderteListe.size() == 2
-				&& meineAndereDummeBehinderteListe.entrySet().contains("Pablo Picasso")
-				&& meineAndereDummeBehinderteListe.entrySet().contains("Salvador Dali"));
+		Map<Integer,Player> List2 = playerManager.getMatching(new Player(-1,1,null,null));
+		assertTrue(List2.size() == 2
+				&& List2.entrySet().contains("Pablo Picasso")
+				&& List2.entrySet().contains("Salvador Dali"));
 	}
 /*
  	@Test
