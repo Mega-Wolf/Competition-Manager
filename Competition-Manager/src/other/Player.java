@@ -2,6 +2,9 @@ package other;
 
 import java.io.Serializable;
 
+/**
+ * Player class; holds trikot-number, teamID, surename and forename
+ */
 public class Player implements EqualWildCard, Serializable {
 	
 	/* Consts */
@@ -36,7 +39,7 @@ public class Player implements EqualWildCard, Serializable {
 	/* Constructor */
 
 	/**
-	 * Create a player
+	 * Create a player; the values are checked with {@link #isValid()}
 	 * 
 	 * @param number
 	 *            trikot-number between 1 and 99
@@ -52,27 +55,14 @@ public class Player implements EqualWildCard, Serializable {
 		this.team = team;
 		this.forename = forename;
 		this.surname = surname;
-
-		if (number <= 0 || number >= 100) {
-			throw new IllegalArgumentException("Trikot-number must be between 1 and 99");
-		}
-		if (team < 0) {
-			throw new IllegalArgumentException("Team ID must be 0 or above");
-		}
-		if (forename == null || forename.length() == 0) {
-			throw new IllegalArgumentException("Empty forename is not allowed");
-		}
-		if (surname == null || surname.length() == 0) {
-			throw new IllegalArgumentException("Empty surname is not allowed");
-		}
-
 	}
 
 	/* Getter */
 
 	/**
 	 * 
-	 * @return trikot-number; between 1 and 99
+	 * @return trikot-number; between 1 and 99 (if valid)
+	 * @see #isValid()
 	 */
 	public int getNumber() {
 		return number;
@@ -80,7 +70,8 @@ public class Player implements EqualWildCard, Serializable {
 
 	/**
 	 * 
-	 * @return teamID; 0 or above
+	 * @return teamID; 0 or above (if valid)
+	 * @see #isValid()
 	 */
 	public int getTeam() {
 		return team;
@@ -88,7 +79,8 @@ public class Player implements EqualWildCard, Serializable {
 
 	/**
 	 * 
-	 * @return forename; neither null nor empty
+	 * @return forename; neither null nor empty (if valid)
+	 * @see #isValid()
 	 */
 	public String getForename() {
 		return forename;
@@ -96,12 +88,13 @@ public class Player implements EqualWildCard, Serializable {
 
 	/**
 	 * 
-	 * @return surname; neither null nor empty
+	 * @return surname; neither null nor empty (if valid)
+	 * @see #isValid()
 	 */
 	public String getSurname() {
 		return surname;
 	}
-
+	
 	/* Overrides */
 	@Override
 	public boolean equals(Object obj) {
@@ -122,5 +115,22 @@ public class Player implements EqualWildCard, Serializable {
 					&& (test.forename == null || forename.equals(test.forename));
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean isValid() {
+		if (number <= 0 || number >= 100) {
+			return false;
+		}
+		if (team < 0) {
+			return false;
+		}
+		if (forename == null || forename.length() == 0) {
+			return false;
+		}
+		if (surname == null || surname.length() == 0) {
+			return false;
+		}
+		return true;
 	}
 }
