@@ -2,6 +2,9 @@ package other;
 
 import java.io.Serializable;
 
+/**
+ * Team class; holds schoolname, and abbreviation of the school
+ */
 public class Team implements EqualWildCard, Serializable {
 	
 	/* Consts */
@@ -35,27 +38,21 @@ public class Team implements EqualWildCard, Serializable {
 
 	/* Constructor */
 	/**
-	 * Creates a Team object
+	 * Creates a Team object; the values are checked with {@link #isValid()}
 	 * @param school the full name of the school; neither null nor empty
 	 * @param abbreviation abbreviation of the school's name; neither null nor empty; should be 2-5 characters
 	 */
 	public Team(String school, String abbreviation) {
 		this.school = school;
 		this.abbreviation = abbreviation;
-		
-		if (school == null || school.length() == 0) {
-			throw new IllegalArgumentException("Empty schoolname is not allowed");
-		}
-		if (abbreviation == null || abbreviation.length() == 0) {
-			throw new IllegalArgumentException("Empty abbreviation is not allowed");
-		}
 	}
 
 	/* Getter */
 	
 	/**
 	 * 
-	 * @return schoolname; neither null nor empty
+	 * @return schoolname; neither null nor empty (if valid)
+	 * @see #isValid()
 	 */
 	public String getSchool() {
 		return school;
@@ -63,7 +60,8 @@ public class Team implements EqualWildCard, Serializable {
 	
 	/**
 	 * 
-	 * @return abbreviation; neither null nor empty
+	 * @return abbreviation; neither null nor empty (if valid)
+	 * @see #isValid()
 	 */
 	public String getAbbreviation() {
 		return abbreviation;
@@ -86,5 +84,16 @@ public class Team implements EqualWildCard, Serializable {
 			return (test.school == null || test.school.equals(school)) && (test.abbreviation == null || test.abbreviation.equals(abbreviation));
 		}
 		return false;
+	}
+	
+	@Override
+	public boolean isValid() {
+		if (school == null || school.length() == 0) {
+			return false;
+		}
+		if (abbreviation == null || abbreviation.length() == 0) {
+			return false;
+		}
+		return true;
 	}
 }

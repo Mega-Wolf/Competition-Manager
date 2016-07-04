@@ -12,4 +12,10 @@ public interface EqualWildCard {
      *          argument; {@code false} otherwise. 
 	 */
 	public boolean equalsWC(Object obj);
+	
+	/**
+	 * Checks, whether the object has valid values; invalid values occur, because of the wildcard functionality 
+	 * @return {@code true} if object is valid {@link false} otherwise
+	 */
+	public boolean isValid();
 }
