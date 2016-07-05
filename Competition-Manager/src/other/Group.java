@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import match.MatchGroup;
+import match.GroupExtension;
 
 public class Group implements EqualWildCard, Serializable {
 	
@@ -16,7 +16,18 @@ public class Group implements EqualWildCard, Serializable {
 	private static final long serialVersionUID = 8696767095231107411L;
 	
 	/* Variables */
-	private GroupStat stats[] = new GroupStat[4];
+	
+	
+	// an inner class for points and goals would have been better, but this was easies for the eq
+	/**
+	 * stores the total number of a goals a team scored in the group
+	 */
+	private int goals[] = new int[4];
+	
+	/**
+	 * stores the total number of points a team scored in the group
+	 */
+	private int points[] = new int[4];
 	
 	/**
 	 * the teamIDs of the 4 teams in the group
@@ -33,23 +44,12 @@ public class Group implements EqualWildCard, Serializable {
 		this.teamIDs = teamIDs;
 	}
 	
-	// TODO
-	public void updateTable(List<MatchGroup> groupMatch) {
-		int ids[] = groupMatch.getTeamIDs();
-	}
-	
 	/* Getter */
 	public int getTeamID(int position) {
 		if (position < 0 || position >= 4) {
 			throw new IllegalArgumentException("Only indices 0 to 3 are allowed");
 		}
 		return teamIDs[position];
-	}
-	
-	
-	//TODO: DONO
-	private class GroupStat {
-		
 	}
 
 	/* Overrides */

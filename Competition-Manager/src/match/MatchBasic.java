@@ -7,39 +7,68 @@ import other.EqualWildCard;
 public class MatchBasic implements EqualWildCard, Serializable{
 	
 	/**
-	 * 
+	 * Needed for Serialization
 	 */
 	private static final long serialVersionUID = 6125016611257734735L;
 
 	/* Variables */
+	
+	public enum MatchType {
+			GROUP_MATCH, ROUND_MATCH, WILDCARD
+	}
+	
+	private MatchType matchType;
+	
 	private final int teamIDs[];
 	
-	private final boolean groupGame;
-	
 	/* Constructors */
-	public MatchBasic(int teamID[], boolean groupGame) {
+	public MatchBasic(MatchType matchType, int teamID[]) {
+		this.matchType = matchType;
 		this.teamIDs = teamID;
-		this.groupGame = groupGame;
 	}
 	
 	/* Getter */
-	public int[] getITeamIDs() {
+	public int[] getTeamIDs() {
 		return teamIDs;
 	}
 	
-	public boolean isGroupGame() {
-		return groupGame;
+	public MatchType getMatchType() {
+		return matchType;
 	}
-
+	
+	/* Overrides */
+	
 	@Override
 	public boolean equalsWC(Object obj) {
-		
+		if (obj instanceof MatchBasic) {
+			MatchBasic test = (MatchBasic) obj;
+			if (test.teamIDs == null) {
+				return true;
+			}
+			for (Integer i: test.teamIDs) {
+				boolean in = false;
+				for (Integer j: this.teamIDs) {
+					if (i.equals(j)) {
+						in = true;
+						break;
+					}
+				}
+				if (!in) {
+					return false;
+				}
+			}
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean isValid() {
 		if (teamIDs.length != 2) {
+			return false;
+		}
+		
+		if (teamIDs[0] < 0 || teamIDs[1] < 0) {
 			return false;
 		}
 		

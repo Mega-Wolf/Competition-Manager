@@ -1,15 +1,13 @@
 package network;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import other.Group;
+import other.GroupStat;
 import other.Manager;
 import other.Player;
 import other.Team;
@@ -66,7 +64,9 @@ public class CompetitionServer {
 
 	Manager<Player> playerManager = new Manager<Player>();
 	Manager<Team> teamManager = new Manager<Team>();
-	// Manager<Group> groupManager = new Manager<Group>();
+	Manager<Group> groupManager = new Manager<Group>();
+	Manager<GroupStat> groupStatManager = new Manager<GroupStat>();
+	
 	// Manager<GroupMatch> groupMatchManager = new Manager<GroupMatch>();
 	// Manager<RoundMatch> roundMatchManager = new Manager<RoundMatch>();
 
@@ -75,7 +75,8 @@ public class CompetitionServer {
 
 		managerMap.put(Operand.PLAYER, playerManager);
 		managerMap.put(Operand.TEAM, teamManager);
-		// managerMap.put(Operand.GROUP, groupManager);
+		managerMap.put(Operand.GROUP, groupManager);
+		managerMap.put(Operand.GROUP_STAT,  groupStatManager);
 		// managerMap.put(Operand.GROUP_MATCH, groupMatchManager);
 		// managerMap.put(Operand.ROUND_MATCH, roundMatchManager);
 

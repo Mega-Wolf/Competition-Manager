@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import match.MatchBasic;
 import network.exceptions.ServerException;
 import other.Group;
+import other.GroupStat;
 import other.Manager;
 import other.Player;
 import other.Team;
@@ -177,7 +178,7 @@ public class Connection extends Thread {
 	 */
 	private void handleInstruction(Operand operand) throws ServerException{
 		switch (operand) {
-		case STATE2:
+		case START_TOURNAMENT:
 			Manager<Team> teamManager = (Manager<Team>) managerMap.get(Operand.TEAM);
 			Manager<Player> playerManager = (Manager<Player>) managerMap.get(Operand.PLAYER);
 			synchronized (teamManager) {
@@ -203,17 +204,24 @@ public class Connection extends Thread {
 			Manager<Group> groupManager = (Manager<Group>) managerMap.get(Operand.GROUP);
 			//synchronization so only one thread can create groups and group matches
 			synchronized (groupManager) {
-				List<Integer> teamListIDs = groupManager.getMatching(new Group(null)).keySet().stream().collect(Collectors.toList()); 
+				List<Integer> teamIDs = groupManager.getMatching(new Group(null)).keySet().stream().collect(Collectors.toList()); 
 				
-				if (teamListIDs.isEmpty()) {
-					List<Group> groupList = ServerHandler.createGroups(teamListIDs);
-					List<MatchBasic> matchList = ServerHandler.createGroupMatches(groupList);
+				if (teamIDs.isEmpty()) {
+					List<Group> groupList = ServerHandler.createGroups(teamIDs);
 					for (Group g : groupList) {
 						groupManager.add(g);
 					}
+					
+					List<MatchBasic> matchList = ServerHandler.createGroupMatches(groupList);
 					Manager<MatchBasic> matchManager = (Manager<MatchBasic>) managerMap.get(Operand.MATCH_BASIC);
 					for (MatchBasic m : matchList) {
 						matchManager.add(m);
+					}
+					
+					List<GroupStat> groupStatList = ServerHandler.createGroupStats(teamIDs);
+					Manager<GroupStat> groupStatManager = (Manager<GroupStat>) managerMap.get(Operand.GROUP_STAT);
+					for (GroupStat gs : groupStatList) {
+						groupStatManager.add(gs);
 					}
 				} else {
 					throw new ServerException(Operation.INSTRUCTION, operand, "Tournament already started");
