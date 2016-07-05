@@ -1,17 +1,30 @@
 package view;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import network.Operand;
+import network.Operation;
 import other.Player;
+import other.Team;
 
 public class NewTeamController {
 	
@@ -24,6 +37,8 @@ public class NewTeamController {
 	
 	@FXML
 	private GridPane grid;
+	@FXML
+	private VBox mainBox;
 	
 	@FXML
 	private Button cancel;
@@ -36,6 +51,10 @@ public class NewTeamController {
 	
 	private int countRow = 2;
 	private int currentPlayerNumber;
+	private int teamID;
+	
+	private List<HBox> createdTextFields;
+	
 	
 	@FXML
 	private void initialize() {
@@ -52,47 +71,67 @@ public class NewTeamController {
 		currentPlayerNumber = 11;
 	}
 	
+	
+	
 	private void generateTextFields(int startWith, int howMany) {
+		System.out.println("hi :-)");
 		for (int i = startWith; i < startWith+howMany; i++) {
-			TextField playerForename = new TextField();
-			playerForename.setPromptText("Vorname Spieler " + (i-1));
-			TextField playerSurname = new TextField();
-			playerSurname.setPromptText("Nachname Spieler " + (i-1));
-			TextField playerNumber = new TextField();
-			playerNumber.setPromptText("Rückennr.");
-			playerNumber.setTooltip(new Tooltip("2 stellige Zahl eingeben"));
-			RowConstraints row = new RowConstraints(25);
-			grid.getRowConstraints().add(row);
-			grid.add(playerForename, 0, i);
-			grid.add(playerSurname, 1, i);
-			grid.add(playerNumber, 2, i);
+			HBox internBox = new HBox(5);
+			internBox.setPadding(new Insets(5,5,5,5));
+			internBox.setPrefHeight(30);
+			TextField forename = new TextField();
+			TextField surname = new TextField();
+			TextField number = new TextField();
+			forename.setPromptText("Vorname Spieler " + (i-1));
+			surname.setPromptText("Nachname Spieler " + (i-1));
+			number.setPromptText("Rückennr.");
+			number.setTooltip(new Tooltip("2 stellige Zahl eingeben"));
+			internBox.getChildren().addAll(forename, surname, number);
+			
+			mainBox.getChildren().add(internBox);
 		}
 	}
 	
+	
 	@FXML
-	private void save() {
+	private void save() throws UnknownHostException, IOException {
 		TextField playerStuff;
 		Player savedPlayer;
-		String forename;
-		String surname;
-		int number;
-		int id = 1;
-		Node result = null;
+		Team savedTeam;
+		String forename = null;
+		String surname = null;
+		int number = 0;
+		String teamSchool = school.getText();
+		String teamSchoolAbbr = abbreviation.getText();
+		//savedTeam = new Team(teamSchool,teamSchoolAbbr);
+		//serverSaveTeam(savedTeam);
+		
 		ObservableList<Node> childrens = grid.getChildren();
+		for (Node n : childrens) {
+			if (grid.getColumnIndex(n) == 0 && grid.getRowIndex(n) == 0) {
+				System.out.println("hier müsste das erste Feld sein");
+			}
+		}
+		
 		for (int i = 2; i < (countRow + currentPlayerNumber); i++) {
 			for (Node node : childrens) {
-				if (grid.getRowIndex(node) == i) {
+				if (GridPane.getRowIndex(node) == i) {
 					playerStuff = (TextField) node;
-					if (grid.getColumnIndex(node) == 0) {
+					if (GridPane.getColumnIndex(node) == 0) {
 						forename = playerStuff.getText();
+						System.out.println("that worked :-)" + forename);
 					}
-					if (grid.getColumnIndex(node) == 1) {
+					if (GridPane.getColumnIndex(node) == 1) {
 						surname = playerStuff.getText();
+						System.out.println("that worked :-)" + surname);
 					}
-					if (grid.getColumnIndex(node) == 2) {
+					if (GridPane.getColumnIndex(node) == 2) {
 						number = toInteger(playerStuff.getText());
+						System.out.println("that worked :-)" + number);
 					}
 				}
+				//savedPlayer = new Player(number, teamID, forename, surname);
+				//serverSavePlayer(savedPlayer);
 			}
 		}
 	}
@@ -138,12 +177,66 @@ public class NewTeamController {
 		} catch(TooManyPlayersException e) {
 			System.err.println("You already added 23 players in your Team.");
 			informationLabel.setText("Sie können nicht mehr als 23 Spieler hinzufügen.");
-			
 		}
-		
 	}
 	
+	//to 
+	public void serverSavePlayer(Player player) throws UnknownHostException, IOException {
+		Thread fu = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				int id = 0;
+				int PORT_NUMBER = 44532;
+				
+				Socket server;
+				try {
+					server = new Socket("127.0.0.1", PORT_NUMBER);
+					
+					try (ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream());)  {
+						out.writeObject(Operation.ADD);
+						out.writeObject(Operand.PLAYER);
+						out.writeObject(player);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					server.close();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}	
+			}
+		});
+	}
 	
+	public void serverSaveTeam(Team team) throws UnknownHostException, IOException {
+		Thread fu = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				int id = 0;
+				int PORT_NUMBER = 44532;
+				
+				Socket server;
+				try {
+					server = new Socket("127.0.0.1", PORT_NUMBER);
+					
+					try (ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream()); ObjectInputStream in = new ObjectInputStream(server.getInputStream());)  {
+						out.writeObject(Operation.ADD);
+						out.writeObject(Operand.TEAM);
+						teamID = (int) in.readObject();
+						out.writeObject(team);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					server.close();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}	
+			}
+		});
+	}
 
 	// Exception: if too many players are added
 	private class TooManyPlayersException extends Exception {
