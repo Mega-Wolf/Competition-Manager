@@ -1,6 +1,6 @@
-package test;
+package match;
 
-public class MatchGroup extends MatchExtension {
+public class GroupExtension extends MatchExtension {
 	
 	/* Consts */
 	public static final int POINTS_WINNER = 3;
@@ -11,7 +11,7 @@ public class MatchGroup extends MatchExtension {
 	private final int groupID;
 	
 	/* Constructor */
-	public MatchGroup(int groupID, int[] goalsRegular) {
+	public GroupExtension(int groupID, int[] goalsRegular) {
 		super(goalsRegular);
 		this.groupID = groupID;
 	}

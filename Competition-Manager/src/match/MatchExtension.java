@@ -1,6 +1,6 @@
-package test;
+package match;
 
-public class MatchExtension {
+public abstract class MatchExtension {
 	
 	/* Variables */
 	protected final int goalsRegular[];

@@ -1,9 +1,12 @@
 package other;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import match.GroupMatch;
+import match.GroupExtension;
 
-public class Group implements Serializable {
+public class Group implements EqualWildCard, Serializable {
 	
 	/* Consts */
 	
@@ -13,7 +16,18 @@ public class Group implements Serializable {
 	private static final long serialVersionUID = 8696767095231107411L;
 	
 	/* Variables */
-	private GroupStat stats[] = new GroupStat[4];
+	
+	
+	// an inner class for points and goals would have been better, but this was easies for the eq
+	/**
+	 * stores the total number of a goals a team scored in the group
+	 */
+	private int goals[] = new int[4];
+	
+	/**
+	 * stores the total number of points a team scored in the group
+	 */
+	private int points[] = new int[4];
 	
 	/**
 	 * the teamIDs of the 4 teams in the group
@@ -28,26 +42,57 @@ public class Group implements Serializable {
 	 */
 	public Group(int teamIDs[]) {
 		this.teamIDs = teamIDs;
-		//checkIDs();
 	}
 	
-	/* Methods */
-	/*private void checkIDs() {
-		if (teamIDs.length == 4) {
-			if (teamIDs[0] == teamIDs[1] || teamIDs[0] == teamIDs[2] || teamIDs[0] == teamIDs[3] || teamIDs[1] == teamIDs[2] || teamIDs[1] == teamIDs[3] || teamIDs[2] == teamIDs[3]) {
-				//TODO: Exception
-			}
+	/* Getter */
+	public int getTeamID(int position) {
+		if (position < 0 || position >= 4) {
+			throw new IllegalArgumentException("Only indices 0 to 3 are allowed");
 		}
-	}*/
-	
-	public void updateTable(GroupMatch match) {
-		int ids[] = match.getTeamIDs();
+		return teamIDs[position];
 	}
+
+	/* Overrides */
 	
-	
-	//TODO: DONO
-	private class GroupStat {
+	@Override
+	public boolean equalsWC(Object obj) {
+		if (obj instanceof Group) {
+			Group test = (Group) obj;
+			if (test.teamIDs == null) {
+				return true;
+			}
+			for (Integer i: test.teamIDs) {
+				boolean in = false;
+				for (Integer j: this.teamIDs) {
+					if (i.equals(j)) {
+						in = true;
+						break;
+					}
+				}
+				if (!in) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isValid() {
+		if (teamIDs.length != 4) {
+			return false;
+		}
+		Set<Integer> set = new HashSet<Integer>();
+		for (Integer i : teamIDs) {
+			set.add(i);
+		}
 		
+		if (set.size() != 4) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 }
