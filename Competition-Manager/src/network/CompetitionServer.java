@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import match.GroupExtension;
+import match.RoundExtension;
 import other.Group;
 import other.GroupStat;
 import other.Manager;
@@ -67,8 +69,8 @@ public class CompetitionServer {
 	Manager<Group> groupManager = new Manager<Group>();
 	Manager<GroupStat> groupStatManager = new Manager<GroupStat>();
 	
-	// Manager<GroupMatch> groupMatchManager = new Manager<GroupMatch>();
-	// Manager<RoundMatch> roundMatchManager = new Manager<RoundMatch>();
+	Manager<GroupExtension> groupExtensionManager = new Manager<GroupExtension>();
+	Manager<RoundExtension> roundExtensionManager = new Manager<RoundExtension>();
 
 	public CompetitionServer() {
 		Map<Operand, Manager<?>> managerMap = new HashMap<>();
@@ -77,8 +79,8 @@ public class CompetitionServer {
 		managerMap.put(Operand.TEAM, teamManager);
 		managerMap.put(Operand.GROUP, groupManager);
 		managerMap.put(Operand.GROUP_STAT,  groupStatManager);
-		// managerMap.put(Operand.GROUP_MATCH, groupMatchManager);
-		// managerMap.put(Operand.ROUND_MATCH, roundMatchManager);
+		managerMap.put(Operand.GROUP_EXTENSION, groupExtensionManager);
+		managerMap.put(Operand.ROUND_EXTENSION, roundExtensionManager);
 
 		managerMap = Collections.unmodifiableMap(managerMap);
 

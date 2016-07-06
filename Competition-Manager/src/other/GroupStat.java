@@ -10,33 +10,73 @@ public class GroupStat implements EqualWildCard, Serializable {
 	// - one shall be able to filter by groupStat (therefore not in group)
 	// - a team shall not be modified after it was added to the team manager
 	// - this way, data of the client and of the server is seperated
-	
+
 	/* Consts */
-	
+
 	/**
 	 * Needed for Serialization
 	 */
 	private static final long serialVersionUID = -4601109759366282454L;
 	
+	/**
+	 * the id of the {@link Team}, to which the GroupStat belongs
+	 */
 	private int teamID = 0;
 	
+	/**
+	 * the goals of the team in all group games
+	 */
 	private int goals = 0;
-	private int points = 0;
 	
+	/**
+	 * the points of the team in all group games
+	 */
+	private int points = 0;
+
+	/**
+	 * 
+	 * @param teamID
+	 */
 	public GroupStat(int teamID) {
 		this.teamID = teamID;
 	}
 	
+	/**
+	 * 
+	 * @return the goals of the team in all group games
+	 */
 	public int getGoals() {
 		return goals;
 	}
 	
+	/**
+	 * 
+	 * @return the points of the team in all group games
+	 */
 	public int getPoints() {
 		return points;
 	}
 	
+	/**
+	 * 
+	 * @return the id of the {@link Team}
+	 */
 	public int getTeam() {
 		return teamID;
+	}
+
+	/**
+	 * Adds points and goals to the GroupStat Synchronized, so that there is no
+	 * race condition, when 2 matches are added parallel
+	 * 
+	 * @param points
+	 *            the points to add to the GroupStat
+	 * @param goals
+	 *            the goals to add to the GroupStat
+	 */
+	public synchronized void addMatchInfo(int points, int goals) {
+		this.points += points;
+		this.goals += goals;
 	}
 
 	@Override
@@ -54,7 +94,5 @@ public class GroupStat implements EqualWildCard, Serializable {
 	public boolean isValid() {
 		return (points >= 0 && goals >= 0);
 	}
-	
-	
-	
+
 }

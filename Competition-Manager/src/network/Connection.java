@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -251,18 +252,28 @@ public class Connection extends Thread {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void handleSet(Operand operand) throws ServerException, ClassNotFoundException, IOException, InvalidObjectException {
 		Manager<MatchBasic> matchBasicManager = (Manager<MatchBasic>) managerMap.get(Operand.MATCH_BASIC);
 		switch (operand) {
-		case GROUP_MATCH:
+		case GROUP_EXTENSION:
 			GroupExtension groupExtension = (GroupExtension) in.readObject();
-			Manager<GroupExtension> groupExtensionManager = (Manager<GroupExtension>) managerMap.get(Operand.GROUP_MATCH);
+			Manager<GroupExtension> groupExtensionManager = (Manager<GroupExtension>) managerMap.get(Operand.GROUP_EXTENSION);
 			MatchBasic matchBasicG = matchBasicManager.get(groupExtension.getMatchID());
 			if (matchBasicG.getMatchType() == MatchBasic.MatchType.GROUP_MATCH) {
 				synchronized(groupExtensionManager) {
 					if (groupExtensionManager.getMatching(new GroupExtension(groupExtension.getMatchID(), -1 , null)).size() == 0) {
 						out.writeObject(groupExtensionManager.add(groupExtension));
 					}
+				}
+				Manager<GroupStat> groupStatManager = (Manager<GroupStat>) managerMap.get(Operand.GROUP_STAT);
+				
+				MatchBasic matchBasic = matchBasicManager.get(groupExtension.getMatchID());
+				
+				for (int i = 0; i < 2; i++) {
+					int teamIndex = matchBasic.getTeamIDs()[i];
+					List<GroupStat> dummy = new LinkedList<GroupStat>(groupStatManager.getMatching(new GroupStat(teamIndex)).values());
+					dummy.get(0).addMatchInfo(groupExtension.getPoints()[i], groupExtension.getGoalsRegular()[i]);
 				}
 			} else {
 				throw new ServerException(Operation.SET, operand, "Wrong kind of match");
@@ -271,7 +282,7 @@ public class Connection extends Thread {
 			break;
 		case ROUND_EXTENSION:
 			RoundExtension roundExtension = (RoundExtension) in.readObject();
-			Manager<RoundExtension> roundExtensionManager = (Manager<RoundExtension>) managerMap.get(Operand.GROUP_MATCH);
+			Manager<RoundExtension> roundExtensionManager = (Manager<RoundExtension>) managerMap.get(Operand.GROUP_EXTENSION);
 			MatchBasic matchBasicR = matchBasicManager.get(roundExtension.getMatchID());
 			if (matchBasicR.getMatchType() == MatchBasic.MatchType.ROUND_MATCH) {
 				synchronized(roundExtensionManager) {

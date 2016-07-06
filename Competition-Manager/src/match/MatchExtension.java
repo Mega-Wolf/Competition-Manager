@@ -53,6 +53,10 @@ public abstract class MatchExtension implements EqualWildCard, Serializable {
 	@Override
 	public boolean isValid() {
 		
+		if (matchID < 0) {
+			return false;
+		}
+		
 		if (goalsRegular.length != 2) {
 			return false;
 		}
