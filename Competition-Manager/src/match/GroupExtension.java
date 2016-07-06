@@ -90,7 +90,7 @@ public class GroupExtension extends MatchExtension {
 	public boolean equalsWC(Object obj) {
 		if (obj instanceof GroupExtension) {
 			GroupExtension test = (GroupExtension) obj;
-			if ((test.matchID == -1 || test.matchID == matchID) && (test.groupID == -1 || test.groupID == this.groupID)) {
+			if (test.groupID == -1 || test.groupID == this.groupID) {
 				if (test.goalsRegular == null) {
 					return true;
 				}
