@@ -36,5 +36,23 @@ public class GroupExtensionTest {
 		expected[1]=1;
 		assertTrue(Arrays.equals(expected,game4.getPoints()));
 	}
+	
+	@Test
+	public void Test5(){
+		GroupExtension game5 = new GroupExtension(1,2,new int[]{2,0});
+		int[] expected = new int[2];
+		expected[0]=3;
+		expected[1]=0;
+		assertTrue(Arrays.equals(expected,game5.getPoints()));
+	}
+	
+	@Test
+	public void Test6(){
+		GroupExtension game6 = new GroupExtension(1,2,new int[]{0,2});
+		int[] expected = new int[2];
+		expected[0]=0;
+		expected[1]=3;
+		assertTrue(Arrays.equals(expected,game6.getPoints()));
+	}
 
 }
