@@ -1,7 +1,9 @@
 package match;
 
+/**
+ * Holds the information of a group match
+ */
 public class GroupExtension extends MatchExtension {
-	
 	
 	/* Consts */
 	

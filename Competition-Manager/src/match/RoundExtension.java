@@ -1,7 +1,7 @@
 package match;
 
 /**
- * Holds the information on a round match - goals after regular 90min, after
+ * Holds the information of a round match - goals after regular 90min, after
  * overtime and after penalty
  */
 public class RoundExtension extends MatchExtension {
@@ -11,7 +11,7 @@ public class RoundExtension extends MatchExtension {
 	/**
 	 * Needed for Serialization
 	 */
-	private static final long serialVersionUID = 5037321836081827278L;
+	private static final long serialVersionUID = 7183528941846558038L;
 	
 	/* Variables */
 
@@ -66,6 +66,30 @@ public class RoundExtension extends MatchExtension {
 	public RoundExtension(int matchID, int roundID, int[] goalsRegular, int[] goalsOvertime, int[] goalsPenalty) {
 		this(matchID, roundID, goalsRegular, goalsOvertime);
 		this.goalsPenalty = goalsPenalty;
+	}
+	
+	/* Getter */
+	
+	public int[] getGoalsOvertime() {
+		return goalsOvertime;
+	}
+	
+	public int[] getGoalsPenalty() {
+		return goalsPenalty;
+	}
+	
+	/**
+	 * 
+	 * @return the winner of the match; either {@code 0} or {@code 1}; attention: NOT the id of the team 
+	 */
+	public int getWinner() {
+		if (goalsPenalty != null) {
+			return (goalsPenalty[1] > goalsPenalty[0]) ? 1 : 0; 
+		}
+		if (goalsOvertime != null) {
+			return (goalsOvertime[1] > goalsOvertime[0]) ? 1 : 0; 
+		}
+		return (goalsRegular[1] > goalsRegular[0]) ? 1 : 0;
 	}
 
 	@Override
