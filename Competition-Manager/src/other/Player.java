@@ -12,10 +12,10 @@ public class Player implements EqualWildCard, Serializable {
 	/**
 	 * needed for serialization
 	 */
-	private static final long serialVersionUID = 4487365076046935560L;
+	private static final long serialVersionUID = 2785664766962032391L;
 	
-	/* Variables */
-	
+	/* Variables */	
+
 	/**
 	 * trikot-number of player; 1 - 99
 	 */

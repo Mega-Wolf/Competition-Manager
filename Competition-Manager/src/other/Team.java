@@ -12,8 +12,8 @@ public class Team implements EqualWildCard, Serializable {
 	/**
 	 * needed for serialization
 	 */
-	private static final long serialVersionUID = 2189452111107525742L;
-	
+	private static final long serialVersionUID = 1742263971782013992L;
+
 	/**
 	 * maximum number of players in a team
 	 */

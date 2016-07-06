@@ -7,12 +7,12 @@ import match.MatchBasic;
 import other.Group;
 import other.GroupStat;
 
-public class ServerHandler {
+public class ServerHelper {
 	
 	/**
 	 * class is just a helper, so it should not be instanciable
 	 */
-	private ServerHandler() {
+	private ServerHelper() {
 	}
 	
 	/**

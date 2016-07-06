@@ -10,7 +10,7 @@ public enum Operand {
 	GROUP,
 	GROUP_STAT,
 	GROUP_MATCH,
-	ROUND_MATCH,
+	ROUND_EXTENSION,
 	MATCH_BASIC,
 	
 	START_TOURNAMENT			//instruction

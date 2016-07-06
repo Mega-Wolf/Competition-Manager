@@ -10,6 +10,7 @@ public enum Operation {
 	GET_MATCHING,		//Object			//Map<Integer, Object>	---
 	ADD,				//Object			//int id				-1
 	REMOVE,				//int id			//boolean				false
+	SET,				//Object			//int id				-1
 	
 	INSTRUCTION			// ---				//boolean				false
 }
