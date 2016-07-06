@@ -1,4 +1,4 @@
-package view;
+package gui;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,7 +20,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		
-		root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+		root = FXMLLoader.load(Main.class.getResource("view/Menu.fxml"));
 		
 		Scene scene = new Scene(root);
 		

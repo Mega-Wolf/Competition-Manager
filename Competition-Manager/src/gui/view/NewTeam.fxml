@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.NewTeamController">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.NewTeamController">
    <children>
       <ScrollPane prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <padding>
@@ -35,11 +35,12 @@
             </VBox>
          </content>
       </ScrollPane>
-      <ButtonBar layoutX="250.0" layoutY="546.0" prefHeight="40.0" prefWidth="413.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0">
+      <ButtonBar layoutX="250.0" layoutY="546.0" prefHeight="40.0" prefWidth="474.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="14.0">
         <buttons>
             <Button fx:id="addPlayer" mnemonicParsing="false" onAction="#addMorePlayers" prefHeight="25.0" text="Spieler hinzufügen" />
+            <Button fx:id="deletePlayer" mnemonicParsing="false" onAction="#deletePlayers" text="Spieler entfernen" />
           <Button mnemonicParsing="false" onAction="#save" text="Speichern" />
-            <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="113.0" text="Verwerfen" />
+            <Button fx:id="cancel" minWidth="53.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="113.0" text="Verwerfen" />
         </buttons>
       </ButtonBar>
       <Label fx:id="informationLabel" layoutX="117.0" layoutY="729.0" AnchorPane.bottomAnchor="42.0" AnchorPane.rightAnchor="14.0" />

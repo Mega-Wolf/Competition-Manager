@@ -1,4 +1,6 @@
-package view;
+package gui.controller;
+
+import gui.Main;
 
 public class GameManagementController {
 	

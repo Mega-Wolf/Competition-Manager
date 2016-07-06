@@ -1,7 +1,8 @@
-package view;
+package gui.controller;
 
 import java.io.IOException;
 
+import gui.Main;
 import javafx.fxml.FXML;
 
 public class SceneController {
@@ -10,27 +11,27 @@ public class SceneController {
 	
 	@FXML
 	public void setTeamManagementView() throws IOException {
-		main.setCenterContent("TeamManagement.fxml");
+		main.setCenterContent("view/TeamManagement.fxml");
 	}
 	
 	@FXML
 	public void setGame() throws IOException {
-		main.setCenterContent("Game.fxml");
+		main.setCenterContent("view/Game.fxml");
 	}
 	
 	@FXML
 	public void setGameManagement() throws IOException {
-		main.setCenterContent("GameManagement.fxml");
+		main.setCenterContent("view/GameManagement.fxml");
 	}
 	
 	@FXML
 	public void setContactView() throws IOException {
-		main.setCenterContent("Contact.fxml");
+		main.setCenterContent("view/Contact.fxml");
 	}
 
 	@FXML
 	public void setHelpView() throws IOException {
-		main.setCenterContent("Help.fxml");
+		main.setCenterContent("view/Help.fxml");
 	}
 
 }

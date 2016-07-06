@@ -1,7 +1,8 @@
-package view;
+package gui.controller;
 
 import java.io.IOException;
 
+import gui.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

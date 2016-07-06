@@ -1,4 +1,4 @@
-package view;
+package gui.controller;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import gui.Main;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,7 +22,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import network.Operand;
 import network.Operation;
-import network.OperationOld;
 import other.Player;
 import other.Team;
 
@@ -31,7 +31,7 @@ public class TeamManagementController {
 	
 	@FXML
 	public void newTeam() throws IOException {
-		main.showNewScene("NewTeam.fxml", "Neues Team eintragen");
+		main.showNewScene("view/NewTeam.fxml", "Neues Team eintragen");
 	}
 	
 	private Team team;
