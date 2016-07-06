@@ -192,6 +192,9 @@ public class NewTeamController {
 	 * @return false if the String extends other characters than digits, has the wrong length or a leading zero; else the method returns true; 
 	 */
 	private boolean isValidNumber(String string) {
+		
+		//return string.matches("[1-9][0-9]?");
+		
 		if (string == null || string.length() == 0 || string.length() > 2) {
 			return false;
 		}
