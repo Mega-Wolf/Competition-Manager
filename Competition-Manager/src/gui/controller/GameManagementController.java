@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import elements.Group;
+import elements.Player;
+import elements.Team;
 import gui.Main;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -23,9 +26,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import network.Operand;
 import network.Operation;
-import other.Group;
-import other.Player;
-import other.Team;
 
 public class GameManagementController {
 	

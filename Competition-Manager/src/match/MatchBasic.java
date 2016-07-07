@@ -2,7 +2,7 @@ package match;
 
 import java.io.Serializable;
 
-import other.EqualWildCard;
+import elements.EqualWildCard;
 
 public class MatchBasic implements EqualWildCard, Serializable{
 	

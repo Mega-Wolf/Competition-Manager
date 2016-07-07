@@ -26,7 +26,7 @@ public class GroupExtension extends MatchExtension {
 	 * @param matchID
 	 *            the id of the match; see {@link MatchBasic}
 	 * @param id
-	 *            of the group; see: {@link other.Group Group}
+	 *            of the group; see: {@link elements.Group Group}
 	 * @param goalsRegular
 	 *            goals after 90min
 	 */

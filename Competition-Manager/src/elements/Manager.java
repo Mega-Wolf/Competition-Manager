@@ -1,6 +1,7 @@
-package other;
+package elements;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -67,7 +68,9 @@ public class Manager<V extends EqualWildCard> {
 	 * @return a map of the matching entries with ids
 	 */
 	public Map<Integer, V> getMatching(Object matchingObject){
-		return map.entrySet().parallelStream().filter(p -> p.getValue().equalsWC(matchingObject)).collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
+		HashMap<Integer, V> dummy = new HashMap<Integer, V>(map.entrySet().parallelStream().filter(p -> p.getValue().equalsWC(matchingObject)).collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue())));
+		
+		return dummy;
 	}
 	
 	/**

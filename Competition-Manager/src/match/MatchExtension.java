@@ -2,7 +2,7 @@ package match;
 
 import java.io.Serializable;
 
-import other.EqualWildCard;
+import elements.EqualWildCard;
 
 /**
  * Extends the information in MatchBasic to either a group or a round match

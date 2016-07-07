@@ -6,13 +6,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import elements.Group;
+import elements.GroupStat;
+import elements.Manager;
+import elements.Player;
+import elements.Team;
 import match.GroupExtension;
 import match.RoundExtension;
-import other.Group;
-import other.GroupStat;
-import other.Manager;
-import other.Player;
-import other.Team;
 
 public class CompetitionServer {
 

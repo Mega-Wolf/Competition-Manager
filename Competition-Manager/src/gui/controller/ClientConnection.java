@@ -20,6 +20,7 @@ public class ClientConnection {
 		
 		public ConnectionThread(List<SendData> dataToSend){
 			this.dataToSend = dataToSend;
+			System.out.println("Created new one");
 		}
 		
 		@Override
@@ -32,14 +33,20 @@ public class ClientConnection {
 				
 				try (ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream()); ObjectInputStream in = new ObjectInputStream(server.getInputStream());) {
 					for (SendData dts : dataToSend) {
+						System.out.println(dts.getOperation());
 						out.writeObject(dts.getOperation());
+						System.out.println(dts.getOperand());
 						out.writeObject(dts.getOperand());
+						System.out.println(dts.getObject());
 						out.writeObject(dts.getObject());
 						
+						
 						dts.setReturnValue(in.readObject());
+						System.out.println(dts.getReturnValue());
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
+					System.exit(-1);
 				}
 				server.close();
 				

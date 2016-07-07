@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 
 import org.junit.Test;
 
+import elements.InvalidObjectException;
+import elements.Manager;
+import elements.Player;
+
 public class ManagerTest {
 
 	@Test

@@ -1,25 +1,25 @@
 package network;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import elements.Group;
+import elements.GroupStat;
+import elements.InvalidObjectException;
+import elements.Manager;
+import elements.Player;
+import elements.Team;
 import match.GroupExtension;
 import match.MatchBasic;
 import match.RoundExtension;
-import other.Group;
-import other.GroupStat;
-import other.InvalidObjectException;
-import other.Manager;
-import other.Player;
-import other.Team;
 
 /**
  * This class handles a connection between the server and a client.
@@ -84,7 +84,9 @@ public class Connection extends Thread {
 			out.writeObject(manager.get((int) in.readObject()));
 			break;
 		case GET_MATCHING:
-			out.writeObject(manager.getMatching(in.readObject()));
+			Object o = in.readObject();
+			System.out.println(o);
+			out.writeObject(manager.getMatching(o));
 			break;
 		case ADD:
 			try {
@@ -365,17 +367,27 @@ public class Connection extends Thread {
 	/* Overrides */
 	@Override
 	public void run() {
-		while (true) {
+		
+		boolean running = true;
+		
+		while (running) {
 			try {
 				Operation operation = (Operation) in.readObject();
+				System.out.println(operation);
 				Operand operand = (Operand) in.readObject();
+				System.out.println(operand);
 				reactOnInput(operation, operand);
 
-			} catch (IOException e) {
+			} catch(EOFException e) {
 				// this occurs e.g. when the client closes the connection
 				// (no really possibility to avoid an exception here)
+				running = false;
+			}
+			
+			catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				System.exit(-1);
 			}
 
 			// these two Exceptions mean; that the client was just TO STUPID to

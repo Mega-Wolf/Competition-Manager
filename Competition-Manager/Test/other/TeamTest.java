@@ -3,7 +3,7 @@ package other;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import other.Team;
+import elements.Team;
 
 public class TeamTest {
 

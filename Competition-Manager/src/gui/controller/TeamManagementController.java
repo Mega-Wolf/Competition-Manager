@@ -13,6 +13,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import elements.Group;
+import elements.Player;
+import elements.Team;
 import gui.Main;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -30,9 +33,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import network.Operand;
 import network.Operation;
-import other.Group;
-import other.Player;
-import other.Team;
 
 public class TeamManagementController {
 	

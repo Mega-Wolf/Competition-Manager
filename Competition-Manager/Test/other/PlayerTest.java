@@ -10,6 +10,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 import org.junit.runners.model.RunnerBuilder;
 
+import elements.Player;
+
 @RunWith(PlayerTest.class)
 @SuiteClasses({PlayerTest.GeneralTest.class, PlayerTest.WildcardTest.class})
 public class PlayerTest extends Suite {

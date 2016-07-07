@@ -1,4 +1,4 @@
-package other;
+package elements;
 
 /**
  * Allows to compare two objects with wildcards

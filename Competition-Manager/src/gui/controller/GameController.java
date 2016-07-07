@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import elements.Group;
+import elements.Team;
 import gui.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import network.Operand;
 import network.Operation;
-import other.Group;
-import other.Team;
 
 public class GameController {
 	

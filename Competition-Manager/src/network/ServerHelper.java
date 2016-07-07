@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import elements.Group;
+import elements.GroupStat;
+import elements.Round;
+import elements.Team;
 import match.MatchBasic;
 import match.MatchBasic.MatchType;
 import match.RoundExtension;
-import other.Group;
-import other.GroupStat;
-import other.Round;
-import other.Team;
 
 public class ServerHelper {
 

@@ -1,4 +1,4 @@
-package other;
+package elements;
 
 public class InvalidObjectException extends Exception {
 	/**
