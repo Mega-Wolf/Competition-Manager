@@ -14,11 +14,6 @@ public class RoundExtension extends MatchExtension {
 	private static final long serialVersionUID = 7183528941846558038L;
 	
 	/* Variables */
-
-	/**
-	 * id of the round; see: {@link other.Round Round}
-	 */
-	private int roundID;
 	
 	/**
 	 * goals after overtime
@@ -35,36 +30,32 @@ public class RoundExtension extends MatchExtension {
 	/**
 	 * Creates a RoundExtension; the game ended after regular time
 	 * @param matchID the id of the match; see {@link MatchBasic}
-	 * @param roundID the id of the round; see: {@link other.Round Round}
 	 * @param goalsRegular goals after 90min
 	 */
-	public RoundExtension(int matchID, int roundID, int[] goalsRegular) {
+	public RoundExtension(int matchID, int[] goalsRegular) {
 		super(matchID, goalsRegular);
-		this.roundID = roundID;
 	}
 	
 	/**
 	 * Creates a RoundExtension; the game ended after overtime
 	 * @param matchID the id of the match; see {@link MatchBasic}
-	 * @param roundID the id of the round; see: {@link other.Round Round}
 	 * @param goalsRegular goals after 90min
 	 * @param goalsOvertime goals after 120min
 	 */
-	public RoundExtension(int matchID, int roundID, int[] goalsRegular, int[] goalsOvertime) {
-		this(matchID, roundID, goalsRegular);
+	public RoundExtension(int matchID, int[] goalsRegular, int[] goalsOvertime) {
+		this(matchID, goalsRegular);
 		this.goalsOvertime = goalsOvertime;
 	}
 	
 	/**
 	 * Creates a RoundExtension; the game ended after penalty shoot-out
 	 * @param matchID the id of the match; see {@link MatchBasic}
-	 * @param roundID the id of the round; see: {@link other.Round Round}
 	 * @param goalsRegular goals after 90min
 	 * @param goalsOvertime goals after 120min
 	 * @param goalsPenalty goals after shoot-out
 	 */
-	public RoundExtension(int matchID, int roundID, int[] goalsRegular, int[] goalsOvertime, int[] goalsPenalty) {
-		this(matchID, roundID, goalsRegular, goalsOvertime);
+	public RoundExtension(int matchID, int[] goalsRegular, int[] goalsOvertime, int[] goalsPenalty) {
+		this(matchID, goalsRegular, goalsOvertime);
 		this.goalsPenalty = goalsPenalty;
 	}
 	
@@ -103,10 +94,6 @@ public class RoundExtension extends MatchExtension {
 	@Override
 	public boolean isValid() {
 		if (!super.isValid()) {
-			return false;
-		}
-		
-		if (roundID < 0) {
 			return false;
 		}
 
@@ -151,7 +138,7 @@ public class RoundExtension extends MatchExtension {
 	public boolean equalsWC(Object obj) {
 		if (obj instanceof RoundExtension) {
 			RoundExtension test = (RoundExtension) obj;
-			if ((test.matchID == -1 || test.matchID == matchID) && (test.roundID == -1 || test.roundID == this.roundID)) {
+			if (test.matchID == -1 || test.matchID == matchID) {
 				return true;			
 			}
 		}

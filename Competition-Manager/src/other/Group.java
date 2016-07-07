@@ -8,12 +8,17 @@ import match.GroupExtension;
 
 public class Group implements EqualWildCard, Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3711357334361749906L;
+
 	/* Consts */
 	
 	/**
 	 * Needed for serialization
 	 */
-	private static final long serialVersionUID = 8696767095231107411L;
+	
 	
 	/* Variables */
 	
