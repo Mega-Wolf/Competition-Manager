@@ -5,6 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javafx.event.ActionEvent;
@@ -103,9 +105,10 @@ public class NewTeamController {
 	 * First the method checks the validity of the given Strings and finally saves - if no errors occur - the players.
 	 * @throws UnknownHostException
 	 * @throws IOException
+	 * @throws InterruptedException 
 	 */
 	@FXML
-	private void save() throws UnknownHostException, IOException {
+	private void save() throws UnknownHostException, IOException, InterruptedException {
 		TextField playerStuff;
 		Player savedPlayer;
 		Team savedTeam;
@@ -115,7 +118,14 @@ public class NewTeamController {
 		String teamSchool = school.getText();
 		String teamSchoolAbbr = abbreviation.getText();
 		savedTeam = new Team(teamSchool,teamSchoolAbbr);
-		// TODO: SENDEN: das obige Team an dich
+		
+		List<SendData> sendDataList = new ArrayList<SendData>();
+		sendDataList.add(new SendData(Operation.ADD, Operand.TEAM, savedTeam));
+		ClientConnection cc = new ClientConnection();
+		cc.sendToServer(sendDataList);
+		
+		teamID = (int) sendDataList.get(0).getReturnValue();
+		
 		boolean breakSaving = false;
 		
 		for (int i = 2; i < (countRow + currentPlayerNumber); i++) {
@@ -147,7 +157,12 @@ public class NewTeamController {
 				surname = sn.getText();
 				number = Integer.parseInt(nb.getText());
 				savedPlayer = new Player(number,teamID,forename,surname);
-				// TODO: SENDEN: den obigen Spieler an dich
+				
+				List<SendData> sendNextDataList = new ArrayList<SendData>();
+				sendNextDataList.add(new SendData(Operation.ADD, Operand.PLAYER, savedPlayer));
+				ClientConnection cc2 = new ClientConnection();
+				cc2.sendToServer(sendDataList);
+				
 				Stage stage = (Stage) cancel.getScene().getWindow();
 				stage.close();
 			}
@@ -246,63 +261,6 @@ public class NewTeamController {
 			System.err.println("You need at least 11 players in your Team.");
 			informationLabel.setText("Sie benötigen mindestens 11 Spieler in Ihrem Team.");
 		}
-	}
-	//to 
-	public void serverSavePlayer(Player player) throws UnknownHostException, IOException {
-		Thread fu = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				int id = 0;
-				int PORT_NUMBER = 44532;
-				
-				Socket server;
-				try {
-					server = new Socket("127.0.0.1", PORT_NUMBER);
-					
-					try (ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream());)  {
-						out.writeObject(Operation.ADD);
-						out.writeObject(Operand.PLAYER);
-						out.writeObject(player);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					server.close();
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}	
-			}
-		});
-	}
-	
-	public void serverSaveTeam(Team team) throws UnknownHostException, IOException {
-		Thread fu = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				int id = 0;
-				int PORT_NUMBER = 44532;
-				
-				Socket server;
-				try {
-					server = new Socket("127.0.0.1", PORT_NUMBER);
-					
-					try (ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream()); ObjectInputStream in = new ObjectInputStream(server.getInputStream());)  {
-						out.writeObject(Operation.ADD);
-						out.writeObject(Operand.TEAM);
-						teamID = (int) in.readObject();
-						out.writeObject(team);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					server.close();
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}	
-			}
-		});
 	}
 
 	// Exception: if too many players are added or deleted

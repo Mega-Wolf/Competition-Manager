@@ -30,6 +30,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import network.Operand;
 import network.Operation;
+import other.Group;
 import other.Player;
 import other.Team;
 
@@ -101,10 +102,11 @@ public class TeamManagementController {
 	
 	/**
 	 * Method to delete teams. Checks the selected team in the team-table and deletes it from the table and from the 
+	 * @throws InterruptedException 
 	 * 
 	 */
 	@FXML
-	public void handleDelete() {
+	public void handleDelete() throws InterruptedException {
 		if(teamTable.getSelectionModel().getSelectedItem() == null) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Fehler");
@@ -124,44 +126,34 @@ public class TeamManagementController {
 			List<SendData> sendDataList = new ArrayList<SendData>();
 			sendDataList.add(new SendData(Operation.REMOVE, Operand.TEAM, indexToDelete));
 			ClientConnection cc = new ClientConnection();
-			cc.sendToServer(sendDataList); //Wirft Fehler
-			//Damit greifst du auf die Rückgabe zurück sendDataList.get(0).getReturnValue()
-			
-			//TODO: SENDEN (Team mit geg. ID zum löschen)
+			cc.sendToServer(sendDataList);
+
 			teamTable.getItems().remove(selectedTeamIndex);
 		}
 	}
 	
 	
 	
-	private Map<Integer, Team> teamMap = new ConcurrentHashMap<Integer,Team>(); // TODO: EMPFANGEN: alle gespeicherten Teams in die Map hier
-	private Map<Integer, Player> playerMap = new ConcurrentHashMap<Integer, Player>(); // TODO: EMPFANGEN: alle gespeicherten Player ...
+	private Map<Integer, Team> teamMap;
+	private Map<Integer, Player> playerMap;
 	private int teamID; 
 	
 	
 	
 	// Test list of teams - have to be read in by 
 	private final ObservableList<Team> teamTestData = FXCollections.observableArrayList();
+	// Test list of some players from different teams
+	private final List<Player> playerData = new ArrayList<Player>();
+		
 	
-	private void readInTeams(Map<Integer,Team> team) {
+	private void readInTeams() throws InterruptedException {
 		teamTestData.clear();
-		team.put(1, new Team("Geschwister-Scholl-Schuhe","GSS"));
-		team.put(2, new Team("Wagenburg-Gymnasium","WG"));
-		team.put(3, new Team("Geschwister-Scholl-Schuheb","GSSB"));
-		team.put(4, new Team("Wagenburg-Gymnasiumb","WGB"));
-		team.put(5, new Team("Geschwister-Scholl-Schuhec","GSSC"));
-		team.put(6, new Team("Wagenburg-Gymnasiumc","WGC"));
-		team.put(7, new Team("Geschwister-Scholl-Schuhed","GSSD"));
-		team.put(8, new Team("Wagenburg-Gymnasiumd","WGD"));
-		team.put(9, new Team("Geschwister-Scholl-Schuhee","GSSE"));
-		team.put(10, new Team("Wagenburg-Gymnasiume","WGE"));
-		team.put(11, new Team("Geschwister-Scholl-Schuhef","GSSF"));
-		team.put(12, new Team("Wagenburg-Gymnasiumf","WGF"));
-		team.put(13, new Team("Geschwister-Scholl-Schuheg","GSSG"));
-		team.put(14, new Team("Wagenburg-Gymnasiumg","WGG"));
-		team.put(15, new Team("Geschwister-Scholl-Schuheh","GSSH"));
-		team.put(16, new Team("Wagenburg-Gymnasiumh","WGH"));
-		teamTestData.addAll(team.values());
+		List<SendData> sendDataList = new ArrayList<SendData>();
+		sendDataList.add(new SendData(Operation.GET_MATCHING, Operand.TEAM, new Team(null,null)));
+		ClientConnection cc2 = new ClientConnection();
+		cc2.sendToServer(sendDataList);
+		teamMap = (Map<Integer,Team>) sendDataList.get(0).getReturnValue();
+		teamTestData.addAll(teamMap.values());
 	}
 	
 	// Own method to store saved teams
@@ -169,14 +161,15 @@ public class TeamManagementController {
 		teamTestData.add(team);
 	}
 	
-	
-	
-	// Test list of some players from different teams
-	private final List<Player> playerData = new ArrayList<Player>(Arrays.asList(new Player(66, 1, "Heinz Heinrich", "Heinzer"), new Player(88, 1, "Conrad", "Ültje"),
-			new Player(23, 1, "Stefan", "Pigman"), new Player(4, 1, "Manuel", "Fokussieren"), new Player(24, 1, "Bore", "Dom"), new Player(6, 1, "Hans", "Wurst"),
-			new Player(13, 1, "Faber", "Castell"), new Player(8, 1, "Pudel S.", "Kern"), new Player(9, 1, "Ketch", "Up"), new Player(10, 1, "Spool", "Mittel"), 
-			new Player(11, 1, "Dis", "Turbed"), new Player(2, 2, "Sergej", "Jegres")));
-	
+	private void readInPlayer() throws InterruptedException {
+		playerData.clear();
+		List<SendData> sendDataList = new ArrayList<SendData>();
+		sendDataList.add(new SendData(Operation.GET_MATCHING, Operand.PLAYER, new Player(-1,-1,null,null)));
+		ClientConnection cc2 = new ClientConnection();
+		cc2.sendToServer(sendDataList);
+		playerMap = (Map<Integer,Player>) sendDataList.get(0).getReturnValue();
+		playerData.addAll(playerMap.values());
+	}
 	// Own method to store saved players
 	public void addToPlayerData(Player player) {
 		playerData.add(player);
@@ -204,10 +197,12 @@ public class TeamManagementController {
 	
 	/**
 	 * Initializes the scene; fills in the team-table with the schools and abbreviations of all teams.
+	 * @throws InterruptedException 
 	 */
 	@FXML
-	private void initialize() {
-		readInTeams(teamMap);
+	private void initialize() throws InterruptedException {
+		readInTeams();
+		readInPlayer();
 		teamTable.setItems(teamTestData);
 		
 		showTeamSchool.setCellValueFactory(new PropertyValueFactory<>("school"));

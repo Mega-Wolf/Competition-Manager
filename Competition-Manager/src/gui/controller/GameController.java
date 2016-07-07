@@ -5,6 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -22,11 +24,19 @@ public class GameController {
 	Main main = new Main();
 	TeamManagementController tmc = new TeamManagementController();
 	
-	private Map<Integer, Team> teamMap = new ConcurrentHashMap<Integer,Team>(); // TODO: EMPFANGEN: alle Teams als Map
-	// TODO: EMPFANGEN: alle Gruppen als Map
+	private Map<Integer, Team> teamMap;
+	private Map<Integer, Group> groupMap;
 	
 	@FXML
-	public void initialize() {
+	public void initialize() throws InterruptedException {
+		List<SendData> sendDataList = new ArrayList<SendData>();
+		sendDataList.add(new SendData(Operation.GET_MATCHING, Operand.GROUP, new Group(null,null)));
+		sendDataList.add(new SendData(Operation.GET_MATCHING, Operand.TEAM, new Team(null,null)));
+		ClientConnection cc2 = new ClientConnection();
+		cc2.sendToServer(sendDataList);
+		groupMap = (Map<Integer,Group>) sendDataList.get(0).getReturnValue();
+		teamMap = (Map<Integer,Team>) sendDataList.get(1).getReturnValue();
+		
 		if(tmc.isFinished()) {
 			
 		}
@@ -38,34 +48,5 @@ public class GameController {
 		
 		
 	}
-	
-	
-		public void loadingTeam() throws UnknownHostException, IOException {
-			
-			Thread thread = new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					int PORT_NUMBER = 44532;
-					
-					Socket server;
-					try {
-						server = new Socket("127.0.0.1",PORT_NUMBER);
-						
-						try (ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream()); ObjectInputStream in = new ObjectInputStream(server.getInputStream());) {
-								out.writeObject(Operation.GET_MATCHING);
-								out.writeObject(Operand.TEAM);
-								
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						server.close();
-						
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-		}
 
 }
