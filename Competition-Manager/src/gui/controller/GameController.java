@@ -27,6 +27,7 @@ public class GameController {
 	//TODO: Wildcard?
 	private Team team = new Team("","");
 	
+	@FXML
 	public void initialize() {
 		if(tmc.isFinished()) {
 			

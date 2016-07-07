@@ -40,9 +40,14 @@ public class TeamManagementController {
 	@FXML
 	private ButtonBar buttonbar;
 	
-	boolean finishedManagement = false;
+	static boolean finishedManagement = false;
 	
-	public boolean isFinished() {
+	public static void setFinish(boolean finished) {
+		finishedManagement = finished;
+	}
+	
+	
+	public static boolean isFinished() {
 		return finishedManagement;
 	}
 	
@@ -82,7 +87,7 @@ public class TeamManagementController {
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK) {
 				buttonbar.getButtons().clear();
-				finishedManagement = true;
+				setFinish(true);
 			}
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -125,7 +130,8 @@ public class TeamManagementController {
 	private Map<Integer, Team> teamMap = new ConcurrentHashMap<Integer,Team>();
 	private int teamID;
 	
-	//TODO: read in team
+	//TODO: read in team: @Tobi: hier muss ich irgendwie eine Map<Integer,Team> mit allen Teams rauskriegen, die ich dann
+	// bei mir in meiner teamMap reinspeichern kann, damit ich meine Tabellen befüllen kann und sowas.
 	public void loadingTeam() throws UnknownHostException, IOException {
 		
 		Thread thread = new Thread(new Runnable() {
@@ -156,7 +162,7 @@ public class TeamManagementController {
 		});
 	}
 	
-	//TODO: delete Team
+	//TODO: delete Team: @Tobi: hier will ich die ID vom Team eingeben, das gelöscht werden soll.
 	public void deleteTeam(int deleteID) throws UnknownHostException, IOException {
 		
 		Thread thread = new Thread(new Runnable() {

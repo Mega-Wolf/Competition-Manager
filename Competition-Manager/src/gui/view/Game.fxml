@@ -300,22 +300,6 @@
                   </VBox>
                </children>
             </HBox>
-      		<!-- FINALE -->
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="1000.0">
-                     <children>
-                        <Label alignment="CENTER" text="Spiel um den 3. Platz" />
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label text="Verlierer Halbfinale 1" />
-                              <Label text="  :  " />
-                              <Label text="Verlierer Halbfinale 2" />
-                           </children>
-                        </HBox>
-                     </children></VBox>
-               </children>
-            </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="1000.0">
