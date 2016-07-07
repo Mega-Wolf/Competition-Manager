@@ -161,10 +161,15 @@ public class NewTeamController {
 	 * @param string Given String to check if valid;
 	 * @return returns false if the String contains non-letters (not including minus and space) or if String doesn't contain letters;
 	 * else the method returns true;
+<<<<<<< HEAD
 	 */
 	public static boolean isValidName(String string) {
 		//return string.matches("[A-Z][a-z]+([- ][A-Z][a-z]+)*");
 
+=======
+	 */
+	public boolean isValidName(String string) {
+>>>>>>> refs/remotes/origin/ListOriented
 		if (string == null || string.length() == 0) {
 			return false;
 		}
@@ -192,11 +197,17 @@ public class NewTeamController {
 	 * parsed into an Integer after this check. The wanted number (and therefore the given String) must be between 1 and 99, should
 	 * have no leading zero and every char must be a digit to enable the parsing later on.
 	 * @param string Given String to check if valid;
+<<<<<<< HEAD
 	 * @return false if the String extends other characters than digits, has the wrong length or a leading zero; else the method returns true; 
 	 */
 	public static boolean isValidNumber(String string) {
 		//return string.matches("[1-9][0-9]?");
 
+=======
+	 * @return false if the String extends other characters than digits, has the wrong length or a leading zero; else the method returns true; 
+	 */
+	public boolean isValidNumber(String string) {
+>>>>>>> refs/remotes/origin/ListOriented
 		if (string == null || string.length() == 0 || string.length() > 2) {
 			return false;
 		}

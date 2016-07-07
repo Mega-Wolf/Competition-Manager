@@ -1,7 +1,13 @@
 package other;
 
 import static org.junit.Assert.*;
+<<<<<<< HEAD
 import java.util.Arrays;
+=======
+
+import java.util.Arrays;
+
+>>>>>>> refs/remotes/origin/ListOriented
 import org.junit.Test;
 import match.GroupExtension;
 
