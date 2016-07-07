@@ -34,9 +34,26 @@ public class MatchBasicTests {
 		
 	}
 
+	//isValid Tests: True, False, False
 	@Test
 	public void testIsValid() {
-		
+		int[] IDs1 = {1,3};
+		MatchBasic match1 = new MatchBasic(MatchType.GROUP_MATCH, IDs1,"Barbara");
+		match1.isValid();
+	}
+	
+	@Test
+	public void testIsNOTValid1() {
+		int[] IDs1 = {-1,3};
+		MatchBasic match1 = new MatchBasic(MatchType.GROUP_MATCH, IDs1,"Barbara");
+		assertFalse(match1.isValid());
+	}
+	
+	@Test
+	public void testIsNOTValid2() {
+		int[] IDs1 = {1,3,4};
+		MatchBasic match1 = new MatchBasic(MatchType.GROUP_MATCH, IDs1,"Barbara");
+		assertFalse(match1.isValid());
 	}
 
 }
