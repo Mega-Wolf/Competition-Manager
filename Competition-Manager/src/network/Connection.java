@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import elements.Group;
 import elements.GroupStat;
 import elements.InvalidObjectException;
@@ -30,6 +33,8 @@ public class Connection extends Thread {
 	// even more complicated;
 	// therefore sticked to the nested switch stuff
 
+	private static Logger log = LogManager.getLogger(Connection.class);
+	
 	/* Variables */
 
 	/**
@@ -85,18 +90,18 @@ public class Connection extends Thread {
 			break;
 		case GET_MATCHING:
 			Object o = in.readObject();
-			System.out.println(o);
 			out.writeObject(manager.getMatching(o));
 			break;
 		case ADD:
 			try {
 				handleAdd(operand);
 			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				log.warn("Invalid operand retrieved from client");
 			} catch (ServerException e) {
 				out.writeObject(-1);
 				out.writeObject(e);
+				log.warn(e);
 			}
 			break;
 		case INSTRUCTION:
@@ -106,6 +111,7 @@ public class Connection extends Thread {
 			} catch (ServerException e) {
 				out.writeObject(false);
 				out.writeObject(e);
+				log.warn(e);
 			}
 			break;
 		case REMOVE:
@@ -114,8 +120,10 @@ public class Connection extends Thread {
 				out.writeObject(true);
 			} catch (UnsupportedOperationException e) {
 				out.writeObject(false);
-				out.writeObject(new ServerException(Operation.REMOVE, operand,
-						"Tournament already startet. You cannot remove teams or players anymore."));
+				ServerException e2 = new ServerException(Operation.REMOVE, operand,
+						"Tournament already startet. You cannot remove teams or players anymore.");
+				out.writeObject(e2);
+				log.error(e2);
 			}
 			break;
 		case SET:
@@ -124,6 +132,7 @@ public class Connection extends Thread {
 			} catch (ServerException e) {
 				out.writeObject(-1);
 				out.writeObject(e);
+				log.warn(e);
 			}
 			break;
 		}
@@ -197,6 +206,7 @@ public class Connection extends Thread {
 	 * @param operand the instruction, the server shall handle
 	 * @throws InvalidObjectException
 	 */
+	@SuppressWarnings("unchecked")
 	private void handleInstruction(Operand operand) throws ServerException, InvalidObjectException {
 		switch (operand) {
 		case START_TOURNAMENT:
@@ -217,7 +227,7 @@ public class Connection extends Thread {
 									"Wrong number of players in team " + teamManager.get(teamID).getAbbreviation());
 						}
 					}
-
+					
 					teamManager.lock();
 					playerManager.lock();
 				}
@@ -245,6 +255,8 @@ public class Connection extends Thread {
 					for (GroupStat gs : groupStatList) {
 						groupStatManager.add(gs);
 					}
+					
+					log.info("Started tournament");
 				} else {
 					throw new ServerException(Operation.INSTRUCTION, operand, "Tournament already started");
 				}
@@ -367,15 +379,15 @@ public class Connection extends Thread {
 	/* Overrides */
 	@Override
 	public void run() {
-		
+		log.trace("Runs thread");
 		boolean running = true;
 		
 		while (running) {
 			try {
 				Operation operation = (Operation) in.readObject();
-				System.out.println(operation);
+				log.debug(operation);
 				Operand operand = (Operand) in.readObject();
-				System.out.println(operand);
+				log.debug(operand);
 				reactOnInput(operation, operand);
 
 			} catch(EOFException e) {
@@ -385,21 +397,18 @@ public class Connection extends Thread {
 			}
 			
 			catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.exit(-1);
+				log.error(e);
+				running = false;
 			}
 
 			// these two Exceptions mean; that the client was just TO STUPID to
 			// send correct parameters
 			// --> why shall I care about giving him a detailed exception report
-			catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvalidObjectException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			catch (ClassNotFoundException | InvalidObjectException e) {
+				log.warn("Invalid operand retrieved from client");
+				running = false;
 			}
 		}
+		log.trace("Ends thread");
 	}
 }

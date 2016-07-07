@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import elements.Player;
 import elements.Team;
 import javafx.event.ActionEvent;
@@ -25,10 +28,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import network.CompetitionServer;
 import network.Operand;
 import network.Operation;
 
 public class NewTeamController {
+	
+	private static Logger log = LogManager.getLogger(NewTeamController.class);
 	
 	//FXML Stuff
 	@FXML
@@ -241,7 +247,7 @@ public class NewTeamController {
 			generateTextFields(startWith, 1);
 			currentPlayerNumber++;
 		} catch(WrongNumberOfPlayersException e) {
-			System.err.println("You already added 23 players in your Team.");
+			log.warn("You already added 23 players in your Team.");
 			informationLabel.setText("Sie können nicht mehr als 23 Spieler hinzufügen.");
 		}
 	}
@@ -258,7 +264,7 @@ public class NewTeamController {
 			mainBox.getChildren().remove(mainBox.getChildren().size()-1);
 			currentPlayerNumber--;
 		} catch(WrongNumberOfPlayersException e) {
-			System.err.println("You need at least 11 players in your Team.");
+			log.warn("You need at least 11 players in your Team.");
 			informationLabel.setText("Sie benötigen mindestens 11 Spieler in Ihrem Team.");
 		}
 	}

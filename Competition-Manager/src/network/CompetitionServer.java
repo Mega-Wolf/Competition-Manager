@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import elements.Group;
 import elements.GroupStat;
 import elements.Manager;
@@ -16,48 +19,10 @@ import match.GroupExtension;
 import match.RoundExtension;
 
 public class CompetitionServer {
+	
+	private static Logger log = LogManager.getLogger(CompetitionServer.class);
 
-	public static void main(String[] args) {
-
-		/*
-		Thread t = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				int PORT_NUMBER = 44532;
-				System.out.println("Vorm Try");
-				Socket server;
-				try {
-					server = new Socket("127.0.0.1", PORT_NUMBER);
-					try (ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream());
-							ObjectInputStream in = new ObjectInputStream(server.getInputStream());) {
-						out.writeObject(Operation.ADD);
-						out.writeObject(Operand.PLAYER);
-						Player p = new Player(1, 1, "f", "sfs");
-						out.writeObject(p);
-						
-						out.writeObject(Operation.ADD);
-						out.writeObject(Operand.PLAYER);
-						out.writeObject(p);
-						
-						//out.flush();
-						System.out.println(in.readObject());
-						// team = (Team) in.readObject();
-						server.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-
-		t.start();
-		*/
-		
+	public static void main(String[] args) {	
 		CompetitionServer cs = new CompetitionServer();
 	}
 
@@ -85,14 +50,13 @@ public class CompetitionServer {
 		managerMap = Collections.unmodifiableMap(managerMap);
 
 		try (ServerSocket server = new ServerSocket(PORT_NUMBER)) {
-			System.out.println("Started server");
+			log.info("Started Server");
 			while (true) {
 				new Connection(server.accept(), managerMap).start();
 			}
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e);
 		}
 
 	}

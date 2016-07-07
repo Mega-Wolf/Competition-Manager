@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <File name="Log" fileName="Log.log" append="false">
+            <PatternLayout pattern="%t %-5p %c{2} - %m%n"/>
+        </File>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
+        </Console>
+    </Appenders>
+    
+    <Loggers>
+        <logger name="gui.controller.ClientConnection">
+            <level value="debug"/>
+        </logger>
+
+        <logger name="network">
+            <level value="debug"/>
+        </logger>
+
+        <!-- This actually works :P -->
+        <logger name="network.CompetitionServer">
+            <level value="error"/>
+        </logger>
+        
+        
+        <Root level="info">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>

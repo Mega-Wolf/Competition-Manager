@@ -6,12 +6,19 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import network.Connection;
+
 /**
  * Manages entries in a map with an auto-increment id
  * Hides direct access to the map
  * @param <V> must extend {@link EqualWildCard}
  */
 public class Manager<V extends EqualWildCard> {
+	
+	private static Logger log = LogManager.getLogger(Manager.class);
 	
 	/* Variables */
 	
@@ -39,6 +46,7 @@ public class Manager<V extends EqualWildCard> {
 		//if (pred.test(newV)) {
 			if (newV.isValid()) {
 				map.put(idCounter, newV);
+				log.info("Added: " + newV);
 				return idCounter++;
 			}
 			throw new InvalidObjectException(newV);
@@ -68,8 +76,8 @@ public class Manager<V extends EqualWildCard> {
 	 * @return a map of the matching entries with ids
 	 */
 	public Map<Integer, V> getMatching(Object matchingObject){
+		//necessary, because Collectors.toMap returns no serializable map
 		HashMap<Integer, V> dummy = new HashMap<Integer, V>(map.entrySet().parallelStream().filter(p -> p.getValue().equalsWC(matchingObject)).collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue())));
-		
 		return dummy;
 	}
 	
