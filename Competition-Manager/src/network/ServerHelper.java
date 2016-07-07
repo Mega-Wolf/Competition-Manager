@@ -8,6 +8,7 @@ import match.RoundExtension;
 import other.Group;
 import other.GroupStat;
 import other.Round;
+import other.Team;
 
 public class ServerHelper {
 
@@ -47,6 +48,11 @@ public class ServerHelper {
 		return groupList;
 	}
 	
+	/**
+	 * Creates a round
+	 * @param teamIDs the IDs of all rounds in the game 
+	 * @return the created round
+	 */
 	public static Round createRound(List<Integer> teamIDs) {
 		int[] teamIDArray = new int[teamIDs.size()];
 		
@@ -72,7 +78,11 @@ public class ServerHelper {
 		return round;
 	}
 	
-
+	/**
+	 * Creates the MatchBasics for the group matches
+	 * @param groupList
+	 * @return
+	 */
 	public static List<MatchBasic> createGroupMatches(List<Group> groupList) {
 		List<MatchBasic> matchList = new ArrayList<MatchBasic>();
 		for (Group g : groupList) {
@@ -94,7 +104,12 @@ public class ServerHelper {
 
 		return matchList;
 	}
-
+	
+	/**
+	 * Creates a groupStat for all Teams
+	 * @param teamIDs
+	 * @return a list of the GroupStats
+	 */
 	public static List<GroupStat> createGroupStats(List<Integer> teamIDs) {
 		List<GroupStat> groupStatList = new ArrayList<GroupStat>();
 
@@ -109,8 +124,14 @@ public class ServerHelper {
 	 * Creates the round matches after the group matches, therefore different parameters are needed
 	 * @return
 	 */
-	public static List<MatchBasic> createFirstRoundMatch(List<GroupStat> groupStatList) {
+	public static List<MatchBasic> createFirstRoundMatch(List<Group> groupList, List<Team> teamList, List<GroupStat> groupStatList) {
 		List<MatchBasic> matchBasicList = new ArrayList<MatchBasic>();
+		
+		List<ArrayList<Integer>> teamIDs = new ArrayList<ArrayList<Integer>>();
+		
+		for (Group g : groupList) {
+			g.
+		}
 		
 		List<ArrayList<GroupStat>> group = new ArrayList<ArrayList<GroupStat>>();
 		

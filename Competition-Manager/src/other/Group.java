@@ -51,6 +51,10 @@ public class Group implements EqualWildCard, Serializable {
 		return teamIDs[position];
 	}
 	
+	public int[] getTeamIDs() {
+		return teamIDs;
+	}
+	
 	public String getName() {
 		return name;
 	}
