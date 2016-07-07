@@ -4,16 +4,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import match.GroupExtension;
 import match.MatchBasic;
 import match.RoundExtension;
-import network.exceptions.ServerException;
 import other.Group;
 import other.GroupStat;
 import other.InvalidObjectException;
@@ -224,8 +223,7 @@ public class Connection extends Thread {
 			// synchronization; so only one thread can create groups and group
 			// matches
 			synchronized (groupManager) {
-				List<Integer> teamIDs = groupManager.getMatching(new Group(null)).keySet().stream()
-						.collect(Collectors.toList());
+				List<Integer> teamIDs = new ArrayList<Integer>(groupManager.getMatching(new Group(null, null)).keySet());
 
 				if (teamIDs.isEmpty()) {
 					List<Group> groupList = ServerHelper.createGroups(teamIDs);

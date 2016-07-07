@@ -91,6 +91,14 @@ public class RoundExtension extends MatchExtension {
 		}
 		return (goalsRegular[1] > goalsRegular[0]) ? 1 : 0;
 	}
+	
+	/**
+	 * 
+	 * @return the loser of the match; either {@code 0} or {@code 1}; attention: NOT the id of the team
+	 */
+	public int getLoser() {
+		return getWinner() == 1 ? 0 : 1;
+	}
 
 	@Override
 	public boolean isValid() {

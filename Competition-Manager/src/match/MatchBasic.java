@@ -17,14 +17,17 @@ public class MatchBasic implements EqualWildCard, Serializable{
 			GROUP_MATCH, ROUND_MATCH, WILDCARD
 	}
 	
-	private MatchType matchType;
+	private final MatchType matchType;
 	
 	private final int teamIDs[];
 	
+	private final String name;
+	
 	/* Constructors */
-	public MatchBasic(MatchType matchType, int teamID[]) {
+	public MatchBasic(MatchType matchType, int teamID[], String name) {
 		this.matchType = matchType;
 		this.teamIDs = teamID;
+		this.name = name;
 	}
 	
 	/* Getter */
@@ -34,6 +37,10 @@ public class MatchBasic implements EqualWildCard, Serializable{
 	
 	public MatchType getMatchType() {
 		return matchType;
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	/* Overrides */

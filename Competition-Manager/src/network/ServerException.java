@@ -1,7 +1,4 @@
-package network.exceptions;
-
-import network.Operand;
-import network.Operation;
+package network;
 
 /**
  * Provides an error code for the client

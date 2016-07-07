@@ -166,6 +166,8 @@ public class NewTeamController {
 		if (string == null || string.length() == 0) {
 			return false;
 		}
+		//return string.matches("[A-Z][a-z]+([- ][A-Z][a-z]+)*");
+		
 		char[] charArray = string.toCharArray();
 		int letterFound = 0;
 		for (char c : charArray) {
