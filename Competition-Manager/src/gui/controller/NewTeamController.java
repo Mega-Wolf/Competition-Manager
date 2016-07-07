@@ -162,10 +162,13 @@ public class NewTeamController {
 	 * @return returns false if the String contains non-letters (not including minus and space) or if String doesn't contain letters;
 	 * else the method returns true;
 	 */
-	public boolean isValidName(String string) {
+	public static boolean isValidName(String string) {
+		//return string.matches("[A-Z][a-z]+([- ][A-Z][a-z]+)*");
+
 		if (string == null || string.length() == 0) {
 			return false;
 		}
+		
 		char[] charArray = string.toCharArray();
 		int letterFound = 0;
 		for (char c : charArray) {
@@ -191,7 +194,9 @@ public class NewTeamController {
 	 * @param string Given String to check if valid;
 	 * @return false if the String extends other characters than digits, has the wrong length or a leading zero; else the method returns true; 
 	 */
-	public boolean isValidNumber(String string) {
+	public static boolean isValidNumber(String string) {
+		//return string.matches("[1-9][0-9]?");
+
 		if (string == null || string.length() == 0 || string.length() > 2) {
 			return false;
 		}

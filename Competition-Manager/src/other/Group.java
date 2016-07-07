@@ -34,14 +34,20 @@ public class Group implements EqualWildCard, Serializable {
 	 */
 	private final int teamIDs[]; 
 	
+	/**
+	 * name of the group 
+	 */
+	private final String name;
+	
 	/* Constructor */
 	
 	/**
 	 * 
 	 * @param teamIDs the teamIDs of the four teams in the group; must be checked by the caller
 	 */
-	public Group(int teamIDs[]) {
+	public Group(int teamIDs[], String name) {
 		this.teamIDs = teamIDs;
+		this.name = name;
 	}
 	
 	/* Getter */
@@ -50,6 +56,10 @@ public class Group implements EqualWildCard, Serializable {
 			throw new IllegalArgumentException("Only indices 0 to 3 are allowed");
 		}
 		return teamIDs[position];
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 	/* Overrides */

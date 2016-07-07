@@ -62,8 +62,6 @@ public class CompetitionServer {
 
 	public static final int PORT_NUMBER = 44532;
 
-	// state variable needed
-
 	Manager<Player> playerManager = new Manager<Player>();
 	Manager<Team> teamManager = new Manager<Team>();
 	Manager<Group> groupManager = new Manager<Group>();
