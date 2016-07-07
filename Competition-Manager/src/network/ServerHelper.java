@@ -1,7 +1,6 @@
 package network;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import match.MatchBasic;
@@ -106,16 +105,19 @@ public class ServerHelper {
 		return groupStatList;
 	}
 
-	/*
-	 * public static List<MatchBasic> createRoundMatch(List<Round> teamIDs) {
-	 * List<MatchBasic> matchBasicList = new ArrayList<MatchBasic>(); for (int i
-	 * = 0; i < teamIDs.size() / 2; i++) { matchBasicList.add(new
-	 * MatchBasic(MatchBasic.MatchType.ROUND_MATCH, new int[]{teamIDs.remove(0),
-	 * teamIDs.remove(0)})); }
-	 * 
-	 * 
-	 * return matchBasicList; }
+	/**
+	 * Creates the round matches after the group matches, therefore different parameters are needed
+	 * @return
 	 */
+	public static List<MatchBasic> createFirstRoundMatch(List<GroupStat> groupStatList) {
+		List<MatchBasic> matchBasicList = new ArrayList<MatchBasic>();
+		
+		List<ArrayList<GroupStat>> group = new ArrayList<ArrayList<GroupStat>>();
+		
+		
+		
+		return matchBasicList;
+	}
 	
 	/**
 	 * Creates new matches for the next round; takes round matches as input

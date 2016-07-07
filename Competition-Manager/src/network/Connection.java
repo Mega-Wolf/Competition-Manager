@@ -190,8 +190,8 @@ public class Connection extends Thread {
 	}
 
 	/**
-	 * 
-	 * @param operand
+	 * Handles the instructions of a clint (only START_TOURNAMENT is allowed for that)
+	 * @param operand the instruction, the server shall handle
 	 * @throws InvalidObjectException
 	 */
 	private void handleInstruction(Operand operand) throws ServerException, InvalidObjectException {
@@ -249,7 +249,15 @@ public class Connection extends Thread {
 			break;
 		}
 	}
-
+	
+	/**
+	 * Extends MatchBasics to GroupExtension or RoundExtension if they haven't been set before
+	 * @param operand the match type; either {@link Operand.GGROUP_EXTENSION} or {@link Operand.ROUND_EXTENSION}
+	 * @throws ServerException
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws InvalidObjectException
+	 */
 	@SuppressWarnings("unchecked")
 	private void handleSet(Operand operand) throws ServerException, ClassNotFoundException, IOException, InvalidObjectException {
 		Manager<MatchBasic> matchBasicManager = (Manager<MatchBasic>) managerMap.get(Operand.MATCH_BASIC);
@@ -262,6 +270,8 @@ public class Connection extends Thread {
 				synchronized(groupExtensionManager) {
 					if (groupExtensionManager.getMatching(new GroupExtension(groupExtension.getMatchID(), -1 , null)).size() == 0) {
 						out.writeObject(groupExtensionManager.add(groupExtension));
+					} else {
+						throw new ServerException(Operation.SET, operand, "Match is already set.");
 					}
 				}
 				Manager<GroupStat> groupStatManager = (Manager<GroupStat>) managerMap.get(Operand.GROUP_STAT);
@@ -273,6 +283,12 @@ public class Connection extends Thread {
 					List<GroupStat> dummy = new LinkedList<GroupStat>(groupStatManager.getMatching(new GroupStat(teamIndex)).values());
 					dummy.get(0).addMatchInfo(groupExtension.getPoints()[i], groupExtension.getGoalsRegular()[i]);
 				}
+				
+				if (groupExtensionManager.getSize() == matchBasicManager.getSize()) {
+					//create Round Matches
+					//ServerHelper.createRoundMatch(match, roundExtensionList)
+				}
+				
 			} else {
 				throw new ServerException(Operation.SET, operand, "Wrong kind of match");
 			}
@@ -294,7 +310,14 @@ public class Connection extends Thread {
 			break;
 		}
 	}
-
+	
+	/**
+	 * Removes Players or Teams from the managers
+	 * @param operand
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws UnsupportedOperationException if the tournament already has started
+	 */
 	@SuppressWarnings({ "unchecked", "incomplete-switch" })
 	private void handleRemove(Operand operand)
 			throws ClassNotFoundException, IOException, UnsupportedOperationException {

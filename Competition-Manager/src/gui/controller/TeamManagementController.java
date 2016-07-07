@@ -120,6 +120,13 @@ public class TeamManagementController {
 					indexToDelete = k;
 				}
 			}
+			
+			List<SendData> sendDataList = new ArrayList<SendData>();
+			sendDataList.add(new SendData(Operation.REMOVE, Operand.TEAM, indexToDelete));
+			ClientConnection cc = new ClientConnection();
+			cc.sendToServer(sendDataList); //Wirft Fehler
+			//Damit greifst du auf die Rückgabe zurück sendDataList.get(0).getReturnValue()
+			
 			//TODO: SENDEN (Team mit geg. ID zum löschen)
 			teamTable.getItems().remove(selectedTeamIndex);
 		}

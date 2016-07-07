@@ -45,6 +45,23 @@ public class Manager<V extends EqualWildCard> {
 	}
 	
 	/**
+	 * Removes the entry with the given id
+	 * @param id the entry's is
+	 */
+	public void remove(int id) {
+		map.remove(id);
+	}
+	
+	/**
+	 * locks map; nothing can be added or removed anymore
+	 */
+	public void lock() {
+		map = Collections.unmodifiableMap(map);
+	}
+	
+	/* Getter */
+	
+	/**
 	 * Returns a map of all entries matching the passed Object according to {@link EqualWildCard#equalsWC(Object obj) equalsWC(Object obj)}
 	 * @param matchingObject the Object witch is compared to the entries
 	 * @return a map of the matching entries with ids
@@ -63,17 +80,12 @@ public class Manager<V extends EqualWildCard> {
 	}
 	
 	/**
-	 * Removes the entry with the given id
-	 * @param id the entry's is
+	 * 
+	 * @return size of the map
 	 */
-	public void remove(int id) {
-		map.remove(id);
+	public int getSize() {
+		return map.size();
 	}
 	
-	/**
-	 * locks map; nothing can be added or removed anymore
-	 */
-	public void lock() {
-		map = Collections.unmodifiableMap(map);
-	}
+	
 }
