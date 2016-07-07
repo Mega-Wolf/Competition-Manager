@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -275,18 +276,30 @@ public class Connection extends Thread {
 					}
 				}
 				Manager<GroupStat> groupStatManager = (Manager<GroupStat>) managerMap.get(Operand.GROUP_STAT);
-				
 				MatchBasic matchBasic = matchBasicManager.get(groupExtension.getMatchID());
 				
+				//the GroupStats of both players get updated
 				for (int i = 0; i < 2; i++) {
 					int teamIndex = matchBasic.getTeamIDs()[i];
 					List<GroupStat> dummy = new LinkedList<GroupStat>(groupStatManager.getMatching(new GroupStat(teamIndex)).values());
 					dummy.get(0).addMatchInfo(groupExtension.getPoints()[i], groupExtension.getGoalsRegular()[i]);
 				}
 				
+				//if all group games are finished, the quarter finals begin
 				if (groupExtensionManager.getSize() == matchBasicManager.getSize()) {
-					//create Round Matches
-					//ServerHelper.createRoundMatch(match, roundExtensionList)
+					Manager<Group> groupManager = (Manager<Group>) managerMap.get(Operand.GROUP);
+					List<Group> groupList = new ArrayList<Group>(groupManager.getMatching(new Group(null, null)).values());
+					
+					Manager<Team> teamManager = (Manager<Team>) managerMap.get(Operand.TEAM);
+					List<Team> teamList = new ArrayList<Team>(teamManager.getMatching(new Team(null, null)).values());
+					
+					List<GroupStat> groupStatList = new LinkedList<GroupStat>(groupStatManager.getMatching(new GroupStat(-1)).values());
+					
+					List<MatchBasic> matchBasicAddList =  ServerHelper.createFirstRoundMatch(groupList, teamList, groupStatList);
+					
+					for (MatchBasic mb : matchBasicAddList) {
+						matchBasicManager.add(mb);
+					}
 				}
 				
 			} else {

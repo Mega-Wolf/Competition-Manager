@@ -1,9 +1,12 @@
 package network;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import match.MatchBasic;
+import match.MatchBasic.MatchType;
 import match.RoundExtension;
 import other.Group;
 import other.GroupStat;
@@ -127,15 +130,28 @@ public class ServerHelper {
 	public static List<MatchBasic> createFirstRoundMatch(List<Group> groupList, List<Team> teamList, List<GroupStat> groupStatList) {
 		List<MatchBasic> matchBasicList = new ArrayList<MatchBasic>();
 		
-		List<ArrayList<Integer>> teamIDs = new ArrayList<ArrayList<Integer>>();
+		List<List<Integer>> teamsInGroup = new ArrayList<List<Integer>>();
 		
 		for (Group g : groupList) {
-			g.
+			int[] teamIDs = g.getTeamIDs();
+			
+			Arrays.asList(teamIDs);
+			
+			List<Integer> groupStatListInGroup = groupStatList
+					.stream()
+					.filter(gs -> Arrays.asList(teamIDs).contains(gs.getTeam()))
+					.sorted((t1,t2) -> Integer.compare(t1.getTeam(), t2.getTeam()))			//if two teams have the same points, the one with the lower ID is preferred (first comes; first servs)
+//forgot to include goals of opponent; therefore comparing goalsvalues is skipped :P					//.sorted((t1,t2) -> Integer.compare(t2.getPoints(), t1.getPoints()))
+					.sorted((t1,t2) -> Integer.compare(t2.getPoints(), t1.getPoints()))
+					.map(gs -> gs.getTeam())
+					.collect(Collectors.toList());
+			teamsInGroup.add(groupStatListInGroup);
 		}
 		
-		List<ArrayList<GroupStat>> group = new ArrayList<ArrayList<GroupStat>>();
-		
-		
+		matchBasicList.add(new MatchBasic(MatchType.ROUND_MATCH, new int[]{teamsInGroup.get(0).get(0), teamsInGroup.get(1).get(1)}, "Viertelfinale 1"));
+		matchBasicList.add(new MatchBasic(MatchType.ROUND_MATCH, new int[]{teamsInGroup.get(2).get(0), teamsInGroup.get(3).get(1)}, "Viertelfinale 2"));
+		matchBasicList.add(new MatchBasic(MatchType.ROUND_MATCH, new int[]{teamsInGroup.get(1).get(0), teamsInGroup.get(0).get(1)}, "Viertelfinale 3"));
+		matchBasicList.add(new MatchBasic(MatchType.ROUND_MATCH, new int[]{teamsInGroup.get(3).get(0), teamsInGroup.get(2).get(1)}, "Viertelfinale 4"));
 		
 		return matchBasicList;
 	}
@@ -152,9 +168,11 @@ public class ServerHelper {
 
 		String matchname = null;
 		switch (matchBasicList.size()) {
-		case 8:
+		
+		//this is handled by createFirstRoundMatch
+		/*case 8:
 			matchname = "Viertelfinale";
-			break;
+			break;*/
 		case 4:
 			matchname = "Halbfinale";
 			break;
