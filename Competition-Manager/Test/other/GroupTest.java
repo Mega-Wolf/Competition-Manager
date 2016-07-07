@@ -39,7 +39,7 @@ public class GroupTest {
 		int[] ID2 = {4,3,2};
 		Group group1 = new Group(ID1);
 		Group group2 = new Group(ID2);
-		group1.equalsWC(group2);
+		assertFalse(group1.equalsWC(group2));
 	}	
 	
 	//isValid() tests, True and false
