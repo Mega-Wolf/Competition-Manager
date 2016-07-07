@@ -69,11 +69,11 @@
                               </AnchorPane>
                           </content>
                         </ScrollPane>
-                        <ButtonBar prefHeight="40.0" prefWidth="546.0">
+                        <ButtonBar fx:id="buttonbar" prefHeight="40.0" prefWidth="546.0">
                           <buttons>
-                            <Button mnemonicParsing="false" prefHeight="25.0" text="Fertig" />
+                            <Button mnemonicParsing="false" onAction="#handleFertig" prefHeight="25.0" text="Fertig" />
                               <Button mnemonicParsing="false" onAction="#newTeam" text="Neues Team eintragen" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" text="Löschen" />
+                              <Button mnemonicParsing="false" onAction="#handleDelete" prefHeight="25.0" text="Löschen" />
                           </buttons>
                         </ButtonBar>
                         <Label alignment="CENTER_RIGHT" contentDisplay="TOP" prefHeight="17.0" prefWidth="552.0" textOverrun="CLIP" />
