@@ -164,6 +164,7 @@ public class NewTeamController {
 	 */
 	public static boolean isValidName(String string) {
 		//return string.matches("[A-Z][a-z]+([- ][A-Z][a-z]+)*");
+
 		if (string == null || string.length() == 0) {
 			return false;
 		}
@@ -195,7 +196,7 @@ public class NewTeamController {
 	 */
 	public static boolean isValidNumber(String string) {
 		//return string.matches("[1-9][0-9]?");
-		
+
 		if (string == null || string.length() == 0 || string.length() > 2) {
 			return false;
 		}
