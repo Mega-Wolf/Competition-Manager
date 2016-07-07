@@ -1,12 +1,14 @@
 package network;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import match.MatchBasic;
 import match.RoundExtension;
 import other.Group;
 import other.GroupStat;
+import other.Round;
 
 public class ServerHelper {
 
@@ -45,6 +47,32 @@ public class ServerHelper {
 
 		return groupList;
 	}
+	
+	public static Round createRound(List<Integer> teamIDs) {
+		int[] teamIDArray = new int[teamIDs.size()];
+		
+		for (int i = 0; i < teamIDs.size(); i++) {
+			teamIDArray[i] = teamIDs.get(i);
+		}
+		
+		String roundname = null;
+		switch(teamIDs.size()) {
+		case 8:
+			roundname = "Runde der letzten 8";
+			break;
+		case 4:
+			roundname = "Runde der letzten 4";
+			break;
+		case 2:
+		roundname = "Finalrunde";
+		break;
+		}
+		
+		Round round = new Round(teamIDArray, roundname); 		
+		
+		return round;
+	}
+	
 
 	public static List<MatchBasic> createGroupMatches(List<Group> groupList) {
 		List<MatchBasic> matchList = new ArrayList<MatchBasic>();
@@ -118,12 +146,6 @@ public class ServerHelper {
 							matchBasicList.get(i + 1).getTeamIDs()[roundExtensionList.get(i + 1).getWinner()] }, matchname + " " + (matchBasicList.size() != 2 ? String.valueOf(i + 1) : "")));
 		}
 		
-		if (matchBasicList.size() == 2) {
-			matchBasicList.add(new MatchBasic(MatchBasic.MatchType.ROUND_MATCH,
-					new int[] { matchBasicList.get(0).getTeamIDs()[roundExtensionList.get(0).getLoser()],
-							matchBasicList.get(1).getTeamIDs()[roundExtensionList.get(1).getLoser()] }, "Spiel um Platz 3"));
-		}
-
 		return matchBasicReturnList;
 	}
 
