@@ -1,12 +1,14 @@
 package network;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import match.MatchBasic;
 import match.RoundExtension;
 import other.Group;
 import other.GroupStat;
+import other.Round;
 
 public class ServerHelper {
 
@@ -45,6 +47,19 @@ public class ServerHelper {
 
 		return groupList;
 	}
+	
+	public static Round createNextRound(List<Integer> teamIDs) {
+		int[] teamIDArray = new int[teamIDs.size()];
+		
+		for (int i = 0; i < teamIDs.size(); i++) {
+			teamIDArray[i] = teamIDs.get(i);
+		}
+		
+		Round round = new Round(teamIDArray, "fdf"); 		
+		
+		return round;
+	}
+	
 
 	public static List<MatchBasic> createGroupMatches(List<Group> groupList) {
 		List<MatchBasic> matchList = new ArrayList<MatchBasic>();

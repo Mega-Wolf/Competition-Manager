@@ -17,18 +17,6 @@ public class Group implements EqualWildCard, Serializable {
 	
 	/* Variables */
 	
-	
-	// an inner class for points and goals would have been better, but this was easies for the eq
-	/**
-	 * stores the total number of a goals a team scored in the group
-	 */
-	private int goals[] = new int[4];
-	
-	/**
-	 * stores the total number of points a team scored in the group
-	 */
-	private int points[] = new int[4];
-	
 	/**
 	 * the teamIDs of the 4 teams in the group
 	 */
@@ -68,6 +56,11 @@ public class Group implements EqualWildCard, Serializable {
 	public boolean equalsWC(Object obj) {
 		if (obj instanceof Group) {
 			Group test = (Group) obj;
+			
+			if (!(test.name == null || this.name.equals(test.name))) {
+				return false;
+			}
+			
 			if (test.teamIDs == null) {
 				return true;
 			}
