@@ -1,0 +1,79 @@
+//15 teams w/ 4 Players each + 2 Players in Team 16
+
+Player player1 = new Player(1,1,"Anna","Metzentin");
+Player player2 = new Player(2,1,"Benjamin","Anders");
+Player player3 = new Player(3,1,"Caroline","Laien");
+Player player4 = new Player(4,1,"David","Lurch");
+
+Player player5 = new Player(5,2,"Noah-Emil","Gustaffson");
+Player player6 = new Player(6,2,"Ike","Smith");
+Player player7 = new Player(7,2,"Hal","Jordan");
+Player player8 = new Player(8,2,"Jake","Gyllenehal");
+
+Player player9 = new Player(9,3,"Kevin","Conroy");
+Player player10 = new Player(10,3,"Liam","Neeson");
+Player player11 = new Player(11,3,"Bruce","Wayne");
+Player player12 = new Player(12,3,"Olliver","Queen");
+
+Player player13 = new Player(13,4,"Clark","Kent");
+Player player14 = new Player(14,4,"Martha","Kent");
+Player player15 = new Player(15,4,"Kori","Ander");
+Player player16 = new Player(16,4,"Ray","Palmer");
+
+Player player17 = new Player(17,5,"Lois","Lane");
+Player player18 = new Player(18,5,"Aubrey","Plaza");
+Player player19 = new Player(19,5,"April","Ludgade");
+Player player20 = new Player(20,5,"Ann","Perkins");
+
+Player player21 = new Player(21,6,"Leslie","Knope");
+Player player22 = new Player(22,6,"Luke","Skywalker");
+Player player23 = new Player(23,6,"Anna","Kendrick");
+Player player24 = new Player(24,6,"Django","Fett");
+
+Player player25 = new Player(25,7,"Nathan","Drake");
+Player player26 = new Player(26,7,"Charlie","Brown");
+Player player27 = new Player(27,7,"Han","Solo");
+Player player28 = new Player(28,7,"Guybrush","Threepwood");
+
+Player player29 = new Player(29,8,"Bruce","Willis");
+Player player30 = new Player(30,8,"Terry","Gilliam");
+Player player31 = new Player(31,8,"Charles","Overlord");
+Player player32 = new Player(32,8,"Liz","Lemon");
+
+Player player33 = new Player(33,9,"Peter","Parker");
+Player player34 = new Player(34,9,"Jenna","Malone");
+Player player35 = new Player(35,9,"Gwen","Stacy");
+Player player36 = new Player(36,9,"Yennefer","von Vengeberg");
+
+Player player37 = new Player(37,10,"Triss","Merigold");
+Player player38 = new Player(38,10,"Cirilla Fiona","Rianon");
+Player player39 = new Player(39,10,"Jason","Todd");
+Player player40 = new Player(40,10,"Roy","Harper");
+
+Player player41 = new Player(41,11,"Hannibal","Lecter");
+Player player42 = new Player(42,11,"Will","Grayham");
+Player player43 = new Player(43,11,"Eric","Idle");
+Player player44 = new Player(44,11,"Arthur","Dent");
+
+Player player45 = new Player(45,12,"Jim","Gordon");
+Player player46 = new Player(5,12,"Jiminy","Cricket");
+Player player47 = new Player(11,12,"Jack","Skellington");
+Player player48 = new Player(16,12,"Cloud","Strife");
+
+Player player49 = new Player(22,13,"Diana","Prince");
+Player player50 = new Player(26,13,"Tifa","Lockhart");
+Player player51 = new Player(27,13,"Dante","Alighieri");
+Player player52 = new Player(33,13,"Anakin","Skywalker");
+
+Player player53 = new Player(37,14,"Harry","Potter");
+Player player54 = new Player(46,14,"Hermine","Granger");
+Player player55 = new Player(57,14,"Kara","El");
+Player player56 = new Player(61,14,"Mary","Poppins");
+
+Player player57 = new Player(62,15,"Edward","Scissorhands");
+Player player58 = new Player(65,15,"Moby","Dick");
+Player player59 = new Player(72,15,"Bud","Spencer");
+Player player60 = new Player(76,15,"Barry","Allen");
+
+Player player61 = new Player(51,16,"Rowan","Atkinson");
+Player player62 = new Player(23,16,"Barbara","Gordon");
