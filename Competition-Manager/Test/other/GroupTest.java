@@ -29,7 +29,7 @@ public class GroupTest {
 		int[] ID1 = {1,2,3,4};
 		int[] ID2 = {1,2,3,4};
 		Group group1 = new Group(ID1,"Peter");
-		Group group2 = new Group(ID2,"Ben");
+		Group group2 = new Group(ID2,null);
 		assertTrue(group1.equalsWC(group2));
 	}
 	
@@ -38,7 +38,7 @@ public class GroupTest {
 		int[] ID1 = {1,2,3,4};
 		int[] ID2 = {4,3,2};
 		Group group1 = new Group(ID1,"Peter");
-		Group group2 = new Group(ID2,"Ben");
+		Group group2 = new Group(ID2, null);
 		assertTrue(group1.equalsWC(group2));
 	}	
 	
