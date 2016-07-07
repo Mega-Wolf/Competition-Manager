@@ -15,7 +15,7 @@ public class MatchBasicTests {
 		int[] IDs1 = {1,2,3,4};
 		int[] expected = {1,2,3,4};
 		
-		MatchBasic match1 = new MatchBasic(MatchType.GROUP_MATCH, IDs1);
+		MatchBasic match1 = new MatchBasic(MatchType.GROUP_MATCH, IDs1, "Barbara");
 		assertEquals(match1.getTeamIDs(),expected);//failure
 	}
 
@@ -25,7 +25,7 @@ public class MatchBasicTests {
 		int[] IDs1 = {1,2,3,4};
 		MatchType expected = MatchType.GROUP_MATCH;
 		
-		MatchBasic match1 = new MatchBasic(MatchType.GROUP_MATCH, IDs1);
+		MatchBasic match1 = new MatchBasic(MatchType.GROUP_MATCH, IDs1,"Barbara");
 		assertEquals(match1.getMatchType(),expected);
 	}
 
