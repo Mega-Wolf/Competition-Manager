@@ -10,6 +10,7 @@ import elements.Group;
 import elements.GroupStat;
 import elements.Manager;
 import elements.Player;
+import elements.Round;
 import elements.Team;
 import match.GroupExtension;
 import match.RoundExtension;
@@ -66,7 +67,7 @@ public class CompetitionServer {
 	Manager<Team> teamManager = new Manager<Team>();
 	Manager<Group> groupManager = new Manager<Group>();
 	Manager<GroupStat> groupStatManager = new Manager<GroupStat>();
-	
+	Manager<Round> roundManager = new Manager<Round>();
 	Manager<GroupExtension> groupExtensionManager = new Manager<GroupExtension>();
 	Manager<RoundExtension> roundExtensionManager = new Manager<RoundExtension>();
 
@@ -79,6 +80,7 @@ public class CompetitionServer {
 		managerMap.put(Operand.GROUP_STAT,  groupStatManager);
 		managerMap.put(Operand.GROUP_EXTENSION, groupExtensionManager);
 		managerMap.put(Operand.ROUND_EXTENSION, roundExtensionManager);
+		managerMap.put(Operand.ROUND, roundManager);
 
 		managerMap = Collections.unmodifiableMap(managerMap);
 

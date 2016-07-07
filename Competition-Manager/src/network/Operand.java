@@ -12,6 +12,7 @@ public enum Operand {
 	GROUP_EXTENSION,
 	ROUND_EXTENSION,
 	MATCH_BASIC,
+	ROUND,
 	
 	START_TOURNAMENT			//instruction
 }
