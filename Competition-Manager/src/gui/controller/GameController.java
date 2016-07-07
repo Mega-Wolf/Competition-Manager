@@ -22,10 +22,8 @@ public class GameController {
 	Main main = new Main();
 	TeamManagementController tmc = new TeamManagementController();
 	
-	private Map<Integer, Team> teamMap = new ConcurrentHashMap<Integer,Team>();
-	
-	//TODO: Wildcard?
-	private Team team = new Team("","");
+	private Map<Integer, Team> teamMap = new ConcurrentHashMap<Integer,Team>(); // TODO: EMPFANGEN: alle Teams als Map
+	// TODO: EMPFANGEN: alle Gruppen als Map
 	
 	@FXML
 	public void initialize() {
@@ -41,7 +39,7 @@ public class GameController {
 		
 	}
 	
-	//TODO: read in team
+	
 		public void loadingTeam() throws UnknownHostException, IOException {
 			
 			Thread thread = new Thread(new Runnable() {
@@ -57,8 +55,7 @@ public class GameController {
 						try (ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream()); ObjectInputStream in = new ObjectInputStream(server.getInputStream());) {
 								out.writeObject(Operation.GET_MATCHING);
 								out.writeObject(Operand.TEAM);
-								team = (Team) in.readObject();
-								out.writeObject(teamMap);
+								
 						} catch (IOException e) {
 							e.printStackTrace();
 						}

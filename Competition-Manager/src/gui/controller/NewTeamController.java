@@ -115,7 +115,7 @@ public class NewTeamController {
 		String teamSchool = school.getText();
 		String teamSchoolAbbr = abbreviation.getText();
 		savedTeam = new Team(teamSchool,teamSchoolAbbr);
-		//serverSaveTeam(savedTeam);
+		// TODO: SENDEN: das obige Team an dich
 		boolean breakSaving = false;
 		
 		for (int i = 2; i < (countRow + currentPlayerNumber); i++) {
@@ -147,7 +147,7 @@ public class NewTeamController {
 				surname = sn.getText();
 				number = Integer.parseInt(nb.getText());
 				savedPlayer = new Player(number,teamID,forename,surname);
-				//serverSavePlayer(savedPlayer);
+				// TODO: SENDEN: den obigen Spieler an dich
 				Stage stage = (Stage) cancel.getScene().getWindow();
 				stage.close();
 			}

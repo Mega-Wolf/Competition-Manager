@@ -78,7 +78,7 @@ public class TeamManagementController {
 	 */
 	@FXML
 	public void handleFertig() {
-		if (teamMap.keySet().size() == 16) {
+		if (teamMap.size() == 16) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Teamverwaltung abschließen");
 			alert.setHeaderText("Haben Sie alle Teams korrekt eingetragen und sind bereit, den Wettkampf zu starten?");
@@ -120,78 +120,18 @@ public class TeamManagementController {
 					indexToDelete = k;
 				}
 			}
-			//deleteTeam(indexToDelete);
+			//TODO: SENDEN (Team mit geg. ID zum löschen)
 			teamTable.getItems().remove(selectedTeamIndex);
 		}
 	}
 	
 	
-	private Team team;
-	private Map<Integer, Team> teamMap = new ConcurrentHashMap<Integer,Team>();
-	private int teamID;
 	
-	//TODO: read in team: @Tobi: hier muss ich irgendwie eine Map<Integer,Team> mit allen Teams rauskriegen, die ich dann
-	// bei mir in meiner teamMap reinspeichern kann, damit ich meine Tabellen befüllen kann und sowas.
-	public void loadingTeam() throws UnknownHostException, IOException {
-		
-		Thread thread = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				int PORT_NUMBER = 44532;
-				
-				Socket server;
-				try {
-					server = new Socket("127.0.0.1",PORT_NUMBER);
-					
-					try (ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream()); ObjectInputStream in = new ObjectInputStream(server.getInputStream());) {
-							out.writeObject(Operation.GET);
-							out.writeObject(Operand.TEAM);
-							out.writeObject(teamID);
-							
-							team = (Team) in.readObject();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					server.close();
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private Map<Integer, Team> teamMap = new ConcurrentHashMap<Integer,Team>(); // TODO: EMPFANGEN: alle gespeicherten Teams in die Map hier
+	private Map<Integer, Player> playerMap = new ConcurrentHashMap<Integer, Player>(); // TODO: EMPFANGEN: alle gespeicherten Player ...
+	private int teamID; 
 	
-	//TODO: delete Team: @Tobi: hier will ich die ID vom Team eingeben, das gelöscht werden soll.
-	public void deleteTeam(int deleteID) throws UnknownHostException, IOException {
-		
-		Thread thread = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				int PORT_NUMBER = 44532;
-				
-				Socket server;
-				try {
-					server = new Socket("127.0.0.1",PORT_NUMBER);
-					
-					try (ObjectOutputStream out = new ObjectOutputStream(server.getOutputStream()); ObjectInputStream in = new ObjectInputStream(server.getInputStream());) {
-							out.writeObject(Operation.GET);
-							out.writeObject(Operand.TEAM);
-							out.writeObject(teamID);
-							
-							team = (Team) in.readObject();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					server.close();
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 	
 	// Test list of teams - have to be read in by 
 	private final ObservableList<Team> teamTestData = FXCollections.observableArrayList();

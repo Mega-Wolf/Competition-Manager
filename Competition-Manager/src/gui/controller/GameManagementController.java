@@ -32,13 +32,13 @@ public class GameManagementController {
 	
 	private Button ready = new Button("Ergebnisse Runde 1 bestätigen");
 	
-	Map<Integer,Group> groups = new ConcurrentHashMap<>();
-	Map<Integer,Team> teams = new ConcurrentHashMap<>();
+	Map<Integer,Group> groups = new ConcurrentHashMap<>(); // TODO: EMPFANGEN: alle Gruppen als Map
+	Map<Integer,Team> teams = new ConcurrentHashMap<>(); // TODO: EMPFANGEN: alle Teams als Map
 	
 	@FXML
 	public void initialize() {
 		if(tmc.isFinished()) {
-			generateStatsR1(groups);
+			generateStatsR1();
 		}
 	}
 	
@@ -100,8 +100,8 @@ public class GameManagementController {
 		});
 	}
 	
-
-	private void generateStatsR1(Map<Integer,Group> group) {
+	
+	private void generateStatsR1() {
 		round1.setSpacing(2);
 		for (int i = 0; i < 12; i++) {
 			
