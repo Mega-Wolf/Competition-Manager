@@ -10,7 +10,7 @@ public class GroupTest {
 	@Test
 	public void testGetTeamID() {
 		int[] ID1 = {1,2,3,4};
-		Group group1 = new Group(ID1);
+		Group group1 = new Group(ID1,"Peter");
 		int pos1 = 1;
 		assertEquals(2,group1.getTeamID(pos1));
 	}
@@ -18,7 +18,7 @@ public class GroupTest {
 	@Test
 	public void testGetNOTeamID() {
 		int[] ID1 = {1,2,3,4};
-		Group group1 = new Group(ID1);
+		Group group1 = new Group(ID1,"Peter");
 		int pos1 = 1;
 		assertFalse(group1.getTeamID(pos1)==3);
 	}
@@ -28,8 +28,8 @@ public class GroupTest {
 	public void testEqualsWC() {
 		int[] ID1 = {1,2,3,4};
 		int[] ID2 = {1,2,3,4};
-		Group group1 = new Group(ID1);
-		Group group2 = new Group(ID2);
+		Group group1 = new Group(ID1,"Peter");
+		Group group2 = new Group(ID2,"Ben");
 		assertTrue(group1.equalsWC(group2));
 	}
 	
@@ -37,23 +37,23 @@ public class GroupTest {
 	public void testEqualsNOTWC() {
 		int[] ID1 = {1,2,3,4};
 		int[] ID2 = {4,3,2};
-		Group group1 = new Group(ID1);
-		Group group2 = new Group(ID2);
-		group1.equalsWC(group2);
+		Group group1 = new Group(ID1,"Peter");
+		Group group2 = new Group(ID2,"Ben");
+		assertTrue(group1.equalsWC(group2));
 	}	
 	
 	//isValid() tests, True and false
 	@Test
 	public void testIsValid() {
 		int[] ID1 = {1,2,3,4};
-		Group group1 = new Group(ID1);
+		Group group1 = new Group(ID1,"Peter");
 		assertTrue(group1.isValid());
 	}
 
 	@Test
 	public void testIsNOTValid() {
 		int[] ID1 = {1,2,3};
-		Group group1 = new Group(ID1);
+		Group group1 = new Group(ID1,"Peter");
 		assertFalse(group1.isValid());
 	}
 
