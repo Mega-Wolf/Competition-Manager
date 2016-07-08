@@ -19,8 +19,9 @@ public class ClientConnection {
 		ConnectionThread a= new ConnectionThread(dataToSend);
 		log.debug("Started");
 		a.start();
-		log.debug("Joined");
+		
 		a.join();
+		log.debug("Joined");
 	}
 	
 	private class ConnectionThread extends Thread {

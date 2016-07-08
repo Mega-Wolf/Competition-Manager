@@ -129,7 +129,7 @@ public class NewTeamController {
 		sendDataList.add(new SendData(Operation.ADD, Operand.TEAM, savedTeam));
 		ClientConnection cc = new ClientConnection();
 		cc.sendToServer(sendDataList);
-		
+		log.debug("After sendToServer");
 		teamID = (int) sendDataList.get(0).getReturnValue();
 		
 		boolean breakSaving = false;
@@ -153,6 +153,7 @@ public class NewTeamController {
 		}
 		
 		if(breakSaving == false) {
+			List<SendData> sendNextDataList = new ArrayList<SendData>();
 			for (int i = 2; i < (countRow + currentPlayerNumber); i++) {
 				HBox current = (HBox) mainBox.getChildren().get(i-1);
 				TextField fn = (TextField) current.getChildren().get(0);
@@ -164,14 +165,14 @@ public class NewTeamController {
 				number = Integer.parseInt(nb.getText());
 				savedPlayer = new Player(number,teamID,forename,surname);
 				
-				List<SendData> sendNextDataList = new ArrayList<SendData>();
 				sendNextDataList.add(new SendData(Operation.ADD, Operand.PLAYER, savedPlayer));
-				ClientConnection cc2 = new ClientConnection();
-				cc2.sendToServer(sendDataList);
 				
 				Stage stage = (Stage) cancel.getScene().getWindow();
 				stage.close();
 			}
+			
+			ClientConnection cc2 = new ClientConnection();
+			cc2.sendToServer(sendNextDataList);
 		}
 	}
 	

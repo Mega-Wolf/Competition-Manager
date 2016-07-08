@@ -24,7 +24,7 @@
         </logger>
         
         
-        <Root level="info">
+        <Root level="trace">
             <AppenderRef ref="STDOUT"/>
         </Root>
     </Loggers>
